@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<abstract:BaseContentPage
+    x:Class="Evira.App.Pages.Debug.ControlGalleryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+    xmlns:debug="clr-namespace:Evira.App.PageModels.Debug"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    Title="{Binding Title}"
+    x:DataType="debug:ControlGalleryPageModel"
+    x:TypeArguments="debug:ControlGalleryPageModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource DarkDark1}}">
+    
+    <ContentView>
+        <ScrollView>
+            <StackLayout Padding="10"
+                         Spacing="10">
+
+                <Button Text="Button MAUI" Command="{Binding OpenWelcomeCommand}"/>
+                <Button Text="Button MAUI" Style="{StaticResource PrimaryRoundButton}" Command="{Binding OpenWelcomeCommand}"/>
+                <Button Text="BUTTON MAUI Disabled" IsEnabled="False"/>
+
+                <controls:AppButton Text="Button no icons, enabled"></controls:AppButton>
+                <controls:AppButton Text="Button no icons, disabled" IsEnabled="False"></controls:AppButton>
+                <controls:AppButton Text="Button no icons round" Variant="Round"></controls:AppButton>
+                
+                <controls:AppButton Text="Button right icon, enabled" RightImageSource="arrow_right_bold"></controls:AppButton>
+                <controls:AppButton Text="Button right icon, disabled" RightImageSource="arrow_right_bold" IsEnabled="False"></controls:AppButton>
+
+                
+                <controls:AppButton Text="Button left icon, enabled" LeftImageSource="arrow_left_bold"></controls:AppButton>
+                <controls:AppButton Text="Button left icon, disabled" LeftImageSource="arrow_left_bold" IsEnabled="False"></controls:AppButton>
+                
+                <controls:AppButton Text="Button right and left icon, enabled" RightImageSource="arrow_right_bold" LeftImageSource="arrow_left_bold"></controls:AppButton>
+
+                <controls:CustomStepper Current="1" Size="5"
+                                        HorizontalOptions="Center"/>
+
+                <controls:CheckboxControl IsChecked="True"
+                                          Text="Test123"
+                                          HorizontalOptions="Center"
+                                         />
+
+                <controls:CheckboxControl IsChecked="True"
+                            HorizontalOptions="Center"
+                            x:Name="CheckBox"/>
+
+                <Label Text="{Binding Source={Reference CheckBox}, Path=IsChecked}" HorizontalTextAlignment="Center" />
+
+                                
+                <controls:EntryControl Image="message_bold"
+                                       Placeholder="Placeholder"/>
+
+                
+                <controls:EntryControl Image="lock_bold"
+                                       IsPassword="True"
+                                       Placeholder="Placeholder"/>
+
+                <StackLayout Spacing="10"
+                             x:Name="labels"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentView>
+    
+</abstract:BaseContentPage>

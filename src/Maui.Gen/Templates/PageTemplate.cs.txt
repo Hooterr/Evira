@@ -1,0 +1,12 @@
+using $VIEWMODELNAMESPACE$;
+using $ROOTNAMESPACE$.Pages.Abstract;
+
+namespace $NAMESPACE$;
+
+public partial class $CLASS$ : BaseContentPage<$CLASS$Model>
+{
+	public $CLASS$($CLASS$Model pageModel) : base(pageModel)
+	{
+		InitializeComponent();
+	}
+}

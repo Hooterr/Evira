@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evira.App", "EviraApp\Evira.App.csproj", "{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{F1784E06-72BC-4E74-80A5-21A39E01AA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Gen", "Maui.Gen\Maui.Gen.csproj", "{AEF6079A-1E16-4FDC-880C-EDF07A284EF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.IconSanitizer", "Maui.IconSanitizer\Maui.IconSanitizer.csproj", "{B47AA78D-D318-40CA-9602-C8C7D2F29B58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6771E1D-C42B-4DE5-AE39-2A4D0A73E7B2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AEF6079A-1E16-4FDC-880C-EDF07A284EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF6079A-1E16-4FDC-880C-EDF07A284EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF6079A-1E16-4FDC-880C-EDF07A284EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF6079A-1E16-4FDC-880C-EDF07A284EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B47AA78D-D318-40CA-9602-C8C7D2F29B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B47AA78D-D318-40CA-9602-C8C7D2F29B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B47AA78D-D318-40CA-9602-C8C7D2F29B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B47AA78D-D318-40CA-9602-C8C7D2F29B58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AEF6079A-1E16-4FDC-880C-EDF07A284EF5} = {F1784E06-72BC-4E74-80A5-21A39E01AA8A}
+		{B47AA78D-D318-40CA-9602-C8C7D2F29B58} = {F1784E06-72BC-4E74-80A5-21A39E01AA8A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Evira.App.Controls.EntryControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+    </ContentView.GestureRecognizers>
+    
+    <Border
+        x:Name="border"
+        BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale50},
+                                          Dark={StaticResource DarkDark2}}"
+        HeightRequest="56"
+        Stroke="{AppThemeBinding Light={StaticResource Greyscale50},
+                                 Dark={StaticResource DarkDark2}}"
+        StrokeLineCap="Round"
+        StrokeLineJoin="Round"
+        StrokeShape="RoundRectangle 12"
+        StrokeThickness="{OnPlatform Android=1,
+                                     iOS=2}">
+
+        <Grid
+            ColumnDefinitions="auto,*,auto"
+            ColumnSpacing="0">
+
+            <Image
+                x:Name="LeadingImage"
+                Margin="15,0,0,0"
+                attachedProperties:TintColorMapper.TintColor="{StaticResource Greyscale500}"
+                IsVisible="False"
+                WidthRequest="20" />
+
+            <Entry
+                x:Name="entry"
+                Grid.Column="1"
+                Margin="15,0"
+                Focused="Entry_Focused"
+                Placeholder="Placeholder"
+                Unfocused="Entry_Unfocused"
+                VerticalOptions="Center" />
+
+            <Image
+                x:Name="EyeIcon"
+                Grid.Column="2"
+                Margin="0,0,15,0"
+                attachedProperties:TintColorMapper.TintColor="{StaticResource Greyscale500}"
+                Source="show_bold"
+                WidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="TapGestureRecognizer_Tapped" />
+                </Image.GestureRecognizers>
+
+            </Image>
+
+        </Grid>
+
+    </Border>
+</ContentView>
+

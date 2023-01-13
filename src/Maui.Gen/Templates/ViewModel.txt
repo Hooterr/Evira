@@ -1,0 +1,35 @@
+using System;
+using $ROOTNAMESPACE$.PageModels.Abstract;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace $NAMESPACE$;
+
+public partial class $CLASS$ : BasePageModel
+{
+    #region Private Members
+
+    #endregion
+    
+    #region Public Properties
+
+    #endregion
+
+    #region Constructor
+
+    /// <summary>
+    /// Default constructor for $CLASS$
+    /// </summary>
+    public $CLASS$()
+    {
+    }
+
+    #endregion
+    
+    #region Public Methods
+    
+    #endregion
+    
+    #region Private Methods
+    
+    #endregion
+}

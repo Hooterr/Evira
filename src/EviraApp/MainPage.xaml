@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Evira.App.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="10"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+           <Button Text="Enabled" IsEnabled="True"/>
+           <Button Text="Disabled" IsEnabled="False"/>
+
+            
+           <Button Text="Enabled" Style="{StaticResource PrimaryRoundButton}" IsEnabled="True"/>
+           <Button Text="Disabled" Style="{StaticResource PrimaryRoundButton}" IsEnabled="False"/>
+
+
+            <Button Text="Open control gallery"
+                    Clicked="Button_Clicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+

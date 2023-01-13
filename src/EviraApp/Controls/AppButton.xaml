@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Evira.App.Controls.AppButton"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    HeightRequest="56"
+    IsClippedToBounds="True">
+
+    <Grid
+        ColumnDefinitions="*, 20, auto, 20, *"
+        ColumnSpacing="20"
+        RowDefinitions="56">
+
+        <BoxView
+            x:Name="BackgroundView"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            CornerRadius="16"
+            Color="{AppThemeBinding Dark={StaticResource Greyscale50},
+                                    Light={StaticResource Primary500}}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup
+                        x:Name="Common">
+                        <VisualState
+                            x:Name="Normal" />
+                        <VisualState
+                            x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, 
+                                                                                                Dark={StaticResource AlertsStatusButtonDisabled}}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+        </BoxView>
+
+        <Image
+            x:Name="LeftImage"
+            Grid.Column="1"
+            attachedProperties:TintColorMapper.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                                           Dark={StaticResource Primary500}}"
+            VerticalOptions="Center" />
+
+        <Label
+            x:Name="LabelView"
+            Grid.Column="2"
+            FontFamily="{StaticResource FontBold}"
+            FontSize="{StaticResource FontSizeLarge}"
+            TextColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                        Dark={StaticResource Primary500}}"
+            VerticalTextAlignment="Center">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup
+                        x:Name="Common">
+                        <VisualState
+                            x:Name="Normal" />
+                        <VisualState
+                            x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{StaticResource OthersWhite}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+        </Label>
+
+        <Image
+            x:Name="RightImage"
+            Grid.Column="3"
+            attachedProperties:TintColorMapper.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                                           Dark={StaticResource Primary500}}"
+            VerticalOptions="Center" />
+
+    </Grid>
+
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer
+            Tapped="TapGestureRecognizer_OnTapped" />
+    </ContentView.GestureRecognizers>
+
+</ContentView>

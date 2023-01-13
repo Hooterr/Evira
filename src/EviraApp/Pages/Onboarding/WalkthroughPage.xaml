@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<abstract:BaseContentPage
+    x:Class="Evira.App.Pages.Onboarding.WalkthroughPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
+    xmlns:onboarding="clr-namespace:Evira.App.PageModels.Onboarding"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="{Binding Title}"
+    x:DataType="onboarding:WalkthroughPageModel"
+    x:TypeArguments="onboarding:WalkthroughPageModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                      Dark={StaticResource DarkDark3}}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        x:Name="wholeWrapper"
+        RowDefinitions="*, auto"
+        RowSpacing="0">
+
+        <CarouselView
+            HorizontalScrollBarVisibility="Never"
+            IsEnabled="True"
+            ItemsSource="{Binding Steps}"
+            Loop="False"
+            Position="{Binding CurrentStep}">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="onboarding:StepModel">
+                    <Grid
+                        RowDefinitions="*, auto"
+                        RowSpacing="0">
+
+                        <Image
+                            Grid.Row="0"
+                            Source="{Binding Image}" />
+
+                        <Label
+                            Grid.Row="1"
+                            Padding="30,30,30,0"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                              Dark={StaticResource DarkDark1}}"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource H2Bold}"
+                            Text="{Binding Text}" />
+
+                    </Grid>
+
+                </DataTemplate>
+
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <ContentView
+            x:Name="bottomWrapper"
+            Grid.Row="1"
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                              Dark={StaticResource DarkDark1}}">
+
+            <StackLayout
+                Padding="30"
+                Spacing="30">
+
+                <controls:CustomStepper
+                    Current="{Binding CurrentStep}"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    Size="{Binding Steps.Count}" />
+
+                <Button
+                    Command="{Binding NextCommand}"
+                    Style="{StaticResource PrimaryRoundButton}"
+                    Text="{Binding ButtonText}"
+                    VerticalOptions="EndAndExpand" />
+
+            </StackLayout>
+
+        </ContentView>
+
+    </Grid>
+
+</abstract:BaseContentPage>

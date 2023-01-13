@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Evira.App.Controls.CheckboxControl">
+
+    <Grid ColumnDefinitions="24,auto"
+          ColumnSpacing="0">
+
+        <Border
+            HeightRequest="24"
+            WidthRequest="24"
+            Grid.Column="0"
+            Padding="{OnPlatform Android=4, iOS=0}"
+            x:Name="border"
+            Stroke="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource DarkDark3}}"
+            StrokeShape="{OnPlatform Android='RoundRectangle 4', iOS='RoundRectangle 8'}"
+            StrokeLineCap="Round"
+            StrokeThickness="{OnPlatform Android=2, iOS=6}">
+
+            <Path
+                x:Name="CheckIcon"
+                Data="M2 5L5 8L11 2"
+                Stroke="{StaticResource OthersWhite}"
+                Aspect="Uniform"
+                IsVisible="True"
+                StrokeThickness="{OnPlatform Android=2.5, iOS=3}"
+                StrokeLineCap="Round"
+                StrokeLineJoin="Round"/>
+
+        </Border>
+
+        <Label IsVisible="False"
+               Style="{StaticResource BodyMediumSemiBold}"
+               x:Name="TextLabel"
+               Padding="12,0,0,0"
+               VerticalTextAlignment="Center"
+               Grid.Column="1"/>
+
+    </Grid>
+    
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+    </ContentView.GestureRecognizers>
+
+</ContentView>
+

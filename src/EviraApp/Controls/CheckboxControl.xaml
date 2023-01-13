@@ -22,7 +22,7 @@
                 Data="M2 5L5 8L11 2"
                 Stroke="{StaticResource OthersWhite}"
                 Aspect="Uniform"
-                IsVisible="True"
+                IsVisible="False"
                 StrokeThickness="{OnPlatform Android=2.5, iOS=3}"
                 StrokeLineCap="Round"
                 StrokeLineJoin="Round"/>

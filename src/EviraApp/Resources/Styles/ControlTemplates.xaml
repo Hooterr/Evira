@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <ControlTemplate x:Key="NavControlTeplate">
+
+        <Grid RowDefinitions="24, 48, 24, *"
+              ColumnDefinitions="24, 28, 16, *, 24"
+              ColumnSpacing="0"
+              RowSpacing="0">
+            
+            <Image Grid.Row="1"
+                   Grid.Column="1"
+                   Source="arrow_left_iconly_light_outline">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"/>
+                </Image.Behaviors>
+
+            </Image>
+
+            <Label Grid.Row="1"
+                   Grid.Column="3"
+                   VerticalTextAlignment="Center"
+                   Style="{StaticResource H4Bold}"
+                   Text="{TemplateBinding BindingContext.Title}"/>
+
+            <ContentPresenter Grid.Row="3"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="3"/>
+        </Grid>
+
+    </ControlTemplate>
+
+</ResourceDictionary>

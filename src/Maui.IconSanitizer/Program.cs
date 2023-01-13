@@ -2,7 +2,7 @@
 
 args = new[]
 {
-    @"/Users/mlach/Downloads/Iconly",
+    @"/Users/mlach/Downloads/Evira - E-Commerce & Online Shop App UI Kit (1)",
     "svg",
 };
 var dir = Directory.GetCurrentDirectory();

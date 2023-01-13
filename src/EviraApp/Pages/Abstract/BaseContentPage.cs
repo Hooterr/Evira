@@ -1,4 +1,5 @@
 ﻿using Evira.App.DependencyServices;
+using Evira.App.Helpers;
 using Evira.App.PageModels.Abstract;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
@@ -14,6 +15,8 @@ public abstract class BaseContentPage<T> : ContentPage where T : BasePageModel
 	protected BaseContentPage(T pageModel)
 	{
 		BindingContext = pageModel;
+		this.SetAppTheme(BackgroundColorProperty, ColorResources.Get("OthersWhite"), ColorResources.Get("DarkDark1"));
+		
 		if (_enableSafeAreaFix)
 		{
 			_safeAreaService = IoC.Current.GetService<ISafeAreaService>();

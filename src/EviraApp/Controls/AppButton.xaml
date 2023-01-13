@@ -29,7 +29,7 @@
                             x:Name="Disabled">
                             <VisualState.Setters>
                                 <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, 
-                                                                                                Dark={StaticResource AlertsStatusButtonDisabled}}" />
+                                                                                                    Dark={StaticResource AlertsStatusButtonDisabled}}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>

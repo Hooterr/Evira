@@ -61,10 +61,6 @@
 	  <None Remove="CommunityToolkit.Maui.Markup" />
 	  <None Remove="Xamarin.CommunityToolkit.MauiCompat" />
 	  <None Remove="Helpers\" />
-	  <None Remove="Resources\Images\Profile.png" />
-	  <None Remove="Resources\Images\Lock.svg" />
-	  <None Remove="Resources\Images\Hide.svg" />
-	  <None Remove="Resources\Images\Show.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Pages\" />

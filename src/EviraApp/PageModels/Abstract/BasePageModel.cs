@@ -1,5 +1,6 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Evira.App.PageModels.Abstract
 {
@@ -8,8 +9,19 @@ namespace Evira.App.PageModels.Abstract
 		[ObservableProperty]
 		private string _title;
 
-		public BasePageModel()
+		protected BasePageModel()
 		{
+		}
+
+		protected virtual bool CanGoBack()
+		{
+			return true;
+		}
+		
+		[RelayCommand(CanExecute = nameof(CanGoBack))]
+		protected virtual async Task GoBackAsync()
+		{
+			await Shell.Current.GoToAsync("../");
 		}
 	}
 }

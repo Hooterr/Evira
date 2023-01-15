@@ -6,8 +6,153 @@
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
     xmlns:login="clr-namespace:Evira.App.PageModels.Login"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
     Title="{Binding Title}"
+    ControlTemplate="{StaticResource NavControlTemplate}"
     x:DataType="login:SignUpPageModel"
-    x:TypeArguments="login:SignUpPageModel">
+    x:TypeArguments="login:SignUpPageModel" 
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+    
+     <VerticalStackLayout
+        Padding="0,10,0,0"
+        Spacing="20"
+        VerticalOptions="Start">
+
+        <Label
+            Padding="0,0,0,30"
+            Style="{StaticResource H1Bold}"
+            Text="Create your account" />
+
+        <controls:EntryControl
+            Image="message_bold"
+            Placeholder="Email"
+            Text="{Binding Email}" />
+
+        <controls:EntryControl
+            Image="lock_bold"
+            IsPassword="True"
+            Placeholder="Password"
+            Text="{Binding Password}" />
+        
+        <controls:EntryControl
+            Image="lock_bold"
+            IsPassword="True"
+            Placeholder="Repeat password"
+            Text="{Binding RepeatPassword}" />
+
+        <controls:AppButton
+            IsEnabled="{Binding SignUpButtonEnabled}"
+            Command="{Binding SignUpCommand}"
+            Text="Sign up"
+            Variant="Round" />
+
+        <Label
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource BodyLargeSemiBold}"
+            Text="Forgot the password?" />
+
+        <Grid
+            Margin="0,45,0,0">
+
+            <BoxView
+                HeightRequest="1"
+                VerticalOptions="Center"
+                Color="{AppThemeBinding Light={StaticResource Greyscale200},
+                                        Dark={StaticResource DarkDark3}}" />
+
+            <Label
+                Padding="16,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                  Dark={StaticResource DarkDark1}}"
+                HorizontalOptions="Center"
+                Style="{StaticResource BodyXLargeSemiBold}"
+                Text="or continue with"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale700},
+                                            Dark={StaticResource Greyscale100}}" />
+
+        </Grid>
+
+        <HorizontalStackLayout
+            HeightRequest="60"
+            HorizontalOptions="Center"
+            Spacing="20">
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                  Dark={StaticResource DarkDark2}}"
+                Stroke="{AppThemeBinding Light={StaticResource Greyscale200},
+                                         Dark={StaticResource DarkDark3}}"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="1"
+                WidthRequest="88">
+                <Image
+                    HeightRequest="24"
+                    Source="facebook_icon"
+                    WidthRequest="24" />
+
+            </Border>
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                  Dark={StaticResource DarkDark2}}"
+                Stroke="{AppThemeBinding Light={StaticResource Greyscale200},
+                                         Dark={StaticResource DarkDark3}}"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="1"
+                WidthRequest="88">
+
+                <Image
+                    HeightRequest="24"
+                    Source="google_icon"
+                    WidthRequest="24" />
+
+            </Border>
+
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                  Dark={StaticResource DarkDark2}}"
+                Stroke="{AppThemeBinding Light={StaticResource Greyscale200},
+                                         Dark={StaticResource DarkDark3}}"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="1"
+                WidthRequest="88">
+
+                <Image
+                    attachedProperties:TintColorMapper.TintColor="{AppThemeBinding Light={StaticResource OthersBlack},
+                                                                                   Dark={StaticResource OthersWhite}}"
+                    HeightRequest="24"
+                    Source="apple_icon"
+                    WidthRequest="24" />
+
+            </Border>
+
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            Spacing="8">
+
+            <Label
+                Style="{StaticResource BodyMediumRegular}"
+                Text="Already have an account?"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale500},
+                                            Dark={StaticResource Greyscale100}}" />
+
+            <Label
+                Style="{StaticResource BodyMediumSemiBold}"
+                Text="Sign in"
+                TextColor="{AppThemeBinding Light={StaticResource Primary500},
+                                            Dark={StaticResource Greyscale100}}" />
+
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToSignInCommand}"/>
+            </HorizontalStackLayout.GestureRecognizers>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
     
 </abstract:BaseContentPage>

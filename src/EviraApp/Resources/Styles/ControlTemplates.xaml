@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:abstract="clr-namespace:Evira.App.PageModels.Abstract">
     
-    <ControlTemplate x:Key="NavControlTeplate">
+    <ControlTemplate x:Key="NavControlTemplate">
 
         <Grid RowDefinitions="24, 48, 24, *"
               ColumnDefinitions="24, 28, 16, *, 24"
@@ -15,14 +16,16 @@
                 <Image.Behaviors>
                     <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"/>
                 </Image.Behaviors>
-
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{TemplateBinding BindingContext.GoBackCommand}"/>
+                </Image.GestureRecognizers>
             </Image>
 
             <Label Grid.Row="1"
                    Grid.Column="3"
                    VerticalTextAlignment="Center"
                    Style="{StaticResource H4Bold}"
-                   Text="{TemplateBinding BindingContext.Title}"/>
+                   Text="{TemplateBinding BindingContext.Title}" />
 
             <ContentPresenter Grid.Row="3"
                               Grid.Column="1"

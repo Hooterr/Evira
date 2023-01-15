@@ -91,7 +91,7 @@ public partial class EntryControl : ContentView
         _isPasswordHiden = !_isPasswordHiden;
         entry.IsPassword = _isPasswordHiden;
         EyeIcon.Source = _isPasswordHiden ? "show_bold" : "hide_bold";
-        // Need to set it here because updating image source doesn't trigger tint update
+        // Need to set it here because updating image source doesn't trigger tint update correctly on iOS
         TintColorMapper.SetTintColor(EyeIcon, null);
         SetEyeIconTint(entry.IsFocused);        
     }

@@ -55,6 +55,10 @@ public partial class SignUpPageModel : BasePageModel
     [RelayCommand]
     private async Task SignUpAsync()
     {
+        await ExecuteBusyAction(async () =>
+        {
+            await Task.Delay(3000);
+        });
     }
     
     #endregion

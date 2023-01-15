@@ -354,6 +354,12 @@
            BasedOn="{StaticResource BaseEditorStyle}">
     </Style>
 
+    
+    <Style
+        TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}"/>
+    </Style>
+    
 
     <!--
     <Style TargetType="ActivityIndicator">

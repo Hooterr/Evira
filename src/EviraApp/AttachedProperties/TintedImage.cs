@@ -1,11 +1,13 @@
 using Evira.App.Extensions;
 using Microsoft.Maui.Handlers;
+using IImage = Microsoft.Maui.IImage;
 
 namespace Evira.App.AttachedProperties;
 
-public static class TintColorMapper
+public static class TintedImageEffect
 {
-     public static readonly BindableProperty TintColorProperty = BindableProperty.CreateAttached("TintColor", typeof(Color), typeof(Image), null);
+     public static readonly BindableProperty TintColorProperty = BindableProperty
+         .CreateAttached("TintColor", typeof(Color), typeof(Image), null);
 
     public static Color GetTintColor(BindableObject view) => (Color)view.GetValue(TintColorProperty);
 
@@ -13,26 +15,26 @@ public static class TintColorMapper
 
     public static void ApplyTintColor()
     {
-        ImageHandler.Mapper.AppendToMapping("TintColor", (handler, view) =>
+        ImageHandler.Mapper.ModifyMapping(nameof(Image.Source), (handler, view, old) =>
         {
-            var tintColor = GetTintColor((Image)handler.VirtualView);
-
-            if (tintColor is not null)
-            {
-#if ANDROID
-                CustomImageExtensions.ApplyColor(handler.PlatformView, tintColor);
-#elif IOS
-                CustomImageExtensions.ApplyColor(handler.PlatformView, tintColor);
-#endif
-            }
-            else
-            {
-#if ANDROID
-                CustomImageExtensions.ClearColor(handler.PlatformView);
-#elif IOS
-                CustomImageExtensions.ClearColor(handler.PlatformView);
-#endif
-            }
+            old?.Invoke(handler, view);
+            ApplyTintColor(handler, view);
         });
+        
+        ImageHandler.Mapper.AppendToMapping("TintColor", ApplyTintColor);
+    }
+
+    private static void ApplyTintColor(IImageHandler handler, IImage view)
+    {
+        var tintColor = GetTintColor((Image)handler.VirtualView);
+
+        if (tintColor is not null)
+        {
+            CustomImageExtensions.ApplyColor(handler.PlatformView, tintColor);
+        }
+        else
+        {
+            CustomImageExtensions.ClearColor(handler.PlatformView);
+        }
     }
 }

@@ -121,7 +121,7 @@
                 WidthRequest="88">
 
                 <Image
-                    attachedProperties:TintColorMapper.TintColor="{AppThemeBinding Light={StaticResource OthersBlack},
+                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersBlack},
                                                                                    Dark={StaticResource OthersWhite}}"
                     HeightRequest="24"
                     Source="apple_icon"

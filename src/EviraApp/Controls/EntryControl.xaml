@@ -29,7 +29,7 @@
             <Image
                 x:Name="LeadingImage"
                 Margin="15,0,0,0"
-                attachedProperties:TintColorMapper.TintColor="{StaticResource Greyscale500}"
+                attachedProperties:TintedImageEffect.TintColor="{StaticResource Greyscale500}"
                 IsVisible="False"
                 WidthRequest="20" />
 
@@ -46,7 +46,7 @@
                 x:Name="EyeIcon"
                 Grid.Column="2"
                 Margin="0,0,15,0"
-                attachedProperties:TintColorMapper.TintColor="{StaticResource Greyscale500}"
+                attachedProperties:TintedImageEffect.TintColor="{StaticResource Greyscale500}"
                 Source="show_bold"
                 WidthRequest="20">
                 <Image.GestureRecognizers>

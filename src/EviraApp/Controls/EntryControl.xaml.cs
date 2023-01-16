@@ -75,37 +75,23 @@ public partial class EntryControl : ContentView
     private void Entry_Focused(object sender, FocusEventArgs e)
     {
         border.SetAppTheme(Border.StrokeProperty, ColorResources.Get("DarkDark3"), ColorResources.Get("OthersWhite"));
-        LeadingImage.SetAppTheme(TintColorMapper.TintColorProperty, ColorResources.Get("DarkDark3"), ColorResources.Get("OthersWhite"));
-        SetEyeIconTint(true);
+        LeadingImage.SetAppTheme(TintedImageEffect.TintColorProperty, ColorResources.Get("DarkDark3"), ColorResources.Get("OthersWhite"));
+        EyeIcon.SetAppTheme(TintedImageEffect.TintColorProperty, ColorResources.Get("DarkDark3"), ColorResources.Get("OthersWhite"));
+
     }
 
     private void Entry_Unfocused(object sender, FocusEventArgs e)
     {
         border.SetAppTheme(Border.StrokeProperty, ColorResources.Get("Greyscale50"), ColorResources.Get("DarkDark2"));
-        TintColorMapper.SetTintColor(LeadingImage, ColorResources.Get("Greyscale500"));
-        SetEyeIconTint(false);
-    }        
+        TintedImageEffect.SetTintColor(LeadingImage, ColorResources.Get("Greyscale500"));
+        TintedImageEffect.SetTintColor(EyeIcon, ColorResources.Get("Greyscale500"));
+    }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         _isPasswordHiden = !_isPasswordHiden;
         entry.IsPassword = _isPasswordHiden;
         EyeIcon.Source = _isPasswordHiden ? "show_bold" : "hide_bold";
-        // Need to set it here because updating image source doesn't trigger tint update correctly on iOS
-        TintColorMapper.SetTintColor(EyeIcon, null);
-        SetEyeIconTint(entry.IsFocused);        
-    }
-
-    private void SetEyeIconTint(bool isFocused)
-    {
-        if (isFocused)
-        {
-            EyeIcon.SetAppTheme(TintColorMapper.TintColorProperty, ColorResources.Get("DarkDark3"), ColorResources.Get("OthersWhite"));
-        }
-        else
-        {
-            TintColorMapper.SetTintColor(EyeIcon, ColorResources.Get("Greyscale500"));
-        }
     }
 
     private void TapGestureRecognizer_OnTapped(object sender, TappedEventArgs e)

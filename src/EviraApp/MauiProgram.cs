@@ -87,7 +87,7 @@ public static class MauiProgram
 #endif
 		});
 		
-		TintColorMapper.ApplyTintColor();
+		TintedImageEffect.ApplyTintColor();
 
 		return builder.Build();
 	}

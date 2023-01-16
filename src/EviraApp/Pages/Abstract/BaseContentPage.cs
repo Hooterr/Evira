@@ -26,7 +26,7 @@ public abstract class BaseContentPage<T> : ContentPage where T : BasePageModel
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
-
+		
 		if (!_enableSafeAreaFix)
 		{
 			return;

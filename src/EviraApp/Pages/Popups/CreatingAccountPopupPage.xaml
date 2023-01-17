@@ -8,7 +8,7 @@
     CloseWhenBackgroundIsClicked="False"
     BackgroundColor="#80000000">
 
-    <Grid RowDefinitions="30, 180, auto, auto, 60, 30"
+    <Grid RowDefinitions="30, 180, auto, auto, auto, 30"
           ColumnDefinitions="40, *, 40"
           Padding="20"
           RowSpacing="20"
@@ -39,7 +39,8 @@
                Style="{StaticResource BodyLargeRegular}"/>
 
         <Image Grid.Row="4"
-               Margin="0,40,0,0"
+               Margin="0,20,0,0"
+               HeightRequest="60"
                Grid.Column="1"
                HorizontalOptions="Center"
                x:Name="spinner"

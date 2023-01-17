@@ -1,4 +1,7 @@
 # Evira E-Commerce
+
+![](doc/Thumbnail.png)
+
 ## Project description
 This project is a proving ground for .NET MAUI framework.
 

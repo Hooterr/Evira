@@ -3,6 +3,9 @@ using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Reflection;
 using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
+using Evira.App.Pages.Popups;
+using Evira.App.Pages.Login;
 
 namespace Evira.App.PageModels.Login;
 
@@ -43,7 +46,9 @@ public partial class ForgotPasswordCreateNewPasswordPageModel : BasePageModel
     [RelayCommand]
     private async Task ContinueAsync()
     {
-
+        await MopupService.Instance.PushAsync(new CreatingAccountPopupPage());
+        await Task.Delay(3000);
+        await MopupService.Instance.PopAsync();
     }
 
     #endregion

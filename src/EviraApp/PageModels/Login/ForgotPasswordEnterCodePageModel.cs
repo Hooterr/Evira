@@ -17,7 +17,7 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
     [ObservableProperty]
     private bool _isResendVisible;
 
-    IDispatcherTimer timer;
+    IDispatcherTimer _timer;
 
     #endregion
 
@@ -36,19 +36,19 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
     {
         Title = "Forgot password";
 
-        timer = Dispatcher.GetForCurrentThread().CreateTimer();
-        timer.Interval = TimeSpan.FromMilliseconds(1000);
-        timer.Tick += (s, e) =>
+        _timer = Dispatcher.GetForCurrentThread().CreateTimer();
+        _timer.Interval = TimeSpan.FromMilliseconds(1000);
+        _timer.Tick += (s, e) =>
         {
             if (TimerValue == 0)
             {
                 IsResendVisible = true;
-                timer.Stop();
+                _timer.Stop();
                 return;
             }
             TimerValue--;
         };
-        timer.Start();
+        _timer.Start();
     }
 
     #endregion
@@ -62,7 +62,12 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
     [RelayCommand]
     private async Task VerifyAsync()
     {
-        timer.Stop();
+        if (!CodeManager.IsVerifyButtonEnabled)
+        {
+            return;
+        }
+
+        _timer.Stop();
         await Shell.Current.GoToAsync($"{nameof(ForgotPasswordCreateNewPasswordPage)}");
     }
 
@@ -75,7 +80,7 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
         });
 
         TimerValue = 60;
-        timer.Start();
+        _timer.Start();
         IsResendVisible = false;
     }
 

@@ -10,6 +10,7 @@ using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
+using Mopups.Hosting;
 
 namespace Evira.App;
 
@@ -21,6 +22,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			.ConfigureMopups()
 			.UseMauiCommunityToolkitMarkup()
 			.ConfigureMauiHandlers(handlers =>
 			{

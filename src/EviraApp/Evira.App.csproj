@@ -60,6 +60,7 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="2.1.0" />
+		<PackageReference Include="Mopups" Version="1.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="CommunityToolkit.Maui" />
@@ -99,5 +100,8 @@
 	  <MauiXaml Update="Resources\Converters\Converters.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+		<MauiXaml Update="Pages\Popups\CreatingAccountPopupPage.xaml">
+			<SubType></SubType>
+		</MauiXaml>
 	</ItemGroup>
 </Project>

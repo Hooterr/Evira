@@ -7,6 +7,7 @@
     xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     xmlns:controls="clr-namespace:Evira.App.Controls"
     xmlns:login="clr-namespace:Evira.App.PageModels.Login"
+    xmlns:enums="clr-namespace:Evira.App.Enums"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="{Binding Title}"
     x:DataType="login:LoginStartPageModel"
@@ -26,7 +27,7 @@
         <Label
             HorizontalOptions="Center"
             Style="{StaticResource H1Bold}"
-            Text="Let's you in" />
+            Text="Let's set you in" />
 
 
         <Border
@@ -53,6 +54,11 @@
                     VerticalTextAlignment="Center" />
 
             </HorizontalStackLayout>
+            
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ThirdPartySignInCommand}"
+                                      CommandParameter="{Static enums:ThirdPartySignInProvider.Facebook}"/>
+            </Border.GestureRecognizers>
 
         </Border>
 
@@ -81,6 +87,11 @@
                     VerticalTextAlignment="Center" />
 
             </HorizontalStackLayout>
+            
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ThirdPartySignInCommand}"
+                                      CommandParameter="{Static enums:ThirdPartySignInProvider.Google}"/>
+            </Border.GestureRecognizers>
         </Border>
 
 
@@ -111,9 +122,14 @@
                     VerticalTextAlignment="Center" />
 
             </HorizontalStackLayout>
+            
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ThirdPartySignInCommand}"
+                                      CommandParameter="{Static enums:ThirdPartySignInProvider.Apple}"/>
+            </Border.GestureRecognizers>
+            
         </Border>
-
-
+        
         <Grid>
 
             <BoxView
@@ -154,6 +170,10 @@
                 Text="Sign up"
                 TextColor="{AppThemeBinding Light={StaticResource Primary500},
                                             Dark={StaticResource Greyscale100}}" />
+
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToSignUpCommand}"/>
+            </HorizontalStackLayout.GestureRecognizers>
 
         </HorizontalStackLayout>
 

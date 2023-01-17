@@ -4,8 +4,8 @@ namespace Evira.App;
 
 public static class AlertHelper
 {
-    public static Task ShowInfoAsync(this ContentPage page, string message)
+    public static Task ShowInfoAsync(string message)
     {
-        return page.DisplayAlert("Info", message, "OK");
+        return Application.Current.MainPage.DisplayAlert("Info", message, "OK");
     }
 }

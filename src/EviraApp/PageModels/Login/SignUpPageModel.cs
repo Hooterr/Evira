@@ -2,6 +2,7 @@ using System;
 using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Evira.App.Enums;
 using Evira.App.Pages.Login;
 
 namespace Evira.App.PageModels.Login;
@@ -46,6 +47,12 @@ public partial class SignUpPageModel : BasePageModel
     
     #region Private Methods
 
+    [RelayCommand]
+    private async Task SignUpWithThirdPartyProviderAsync(ThirdPartySignInProvider provider)
+    {
+        await AlertHelper.ShowInfoAsync($"Singing up with {provider}");
+    }
+    
     [RelayCommand]
     private async Task NavigateToSignInAsync()
     {

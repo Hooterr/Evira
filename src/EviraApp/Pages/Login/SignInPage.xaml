@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:Evira.App.Controls"
     xmlns:login="clr-namespace:Evira.App.PageModels.Login"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:enums="clr-namespace:Evira.App.Enums"
     Title="{Binding Title}"
     x:DataType="login:SignInPageModel"
     x:TypeArguments="login:SignInPageModel"
@@ -48,7 +49,11 @@
         <Label
             HorizontalTextAlignment="Center"
             Style="{StaticResource BodyLargeSemiBold}"
-            Text="Forgot the password?" />
+            Text="Forgot the password?">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToForgotPasswordCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
 
         <Grid
             Margin="0,45,0,0">
@@ -88,7 +93,11 @@
                     HeightRequest="24"
                     Source="facebook_icon"
                     WidthRequest="24" />
-
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignInWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Facebook}"/>
+                </Border.GestureRecognizers>
             </Border>
 
             <Border
@@ -104,7 +113,11 @@
                     HeightRequest="24"
                     Source="google_icon"
                     WidthRequest="24" />
-
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignInWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Google}"/>
+                </Border.GestureRecognizers>
             </Border>
 
 
@@ -124,6 +137,11 @@
                     Source="apple_icon"
                     WidthRequest="24" />
 
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignInWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Apple}"/>
+                </Border.GestureRecognizers>
+                
             </Border>
 
 

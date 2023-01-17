@@ -8,6 +8,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     xmlns:controls="clr-namespace:Evira.App.Controls"
+    xmlns:enums="clr-namespace:Evira.App.Enums"
     Title="{Binding Title}"
     ControlTemplate="{StaticResource NavControlTemplate}"
     x:DataType="login:SignUpPageModel"
@@ -48,11 +49,6 @@
             Text="Sign up"
             Variant="Round" />
 
-        <Label
-            HorizontalTextAlignment="Center"
-            Style="{StaticResource BodyLargeSemiBold}"
-            Text="Forgot the password?" />
-
         <Grid
             Margin="0,45,0,0">
 
@@ -91,6 +87,11 @@
                     HeightRequest="24"
                     Source="facebook_icon"
                     WidthRequest="24" />
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Facebook}"/>
+                </Border.GestureRecognizers>
 
             </Border>
 
@@ -108,6 +109,11 @@
                     Source="google_icon"
                     WidthRequest="24" />
 
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Google}"/>
+                </Border.GestureRecognizers>
+                
             </Border>
 
 
@@ -126,6 +132,11 @@
                     HeightRequest="24"
                     Source="apple_icon"
                     WidthRequest="24" />
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpWithThirdPartyProviderCommand}"
+                                          CommandParameter="{Static enums:ThirdPartySignInProvider.Apple}"/>
+                </Border.GestureRecognizers>
 
             </Border>
 

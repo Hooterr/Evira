@@ -21,6 +21,7 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
     /// </summary>
     public ForgotPasswordEnterCodePageModel()
     {
+        Title = "Forgot password";
     }
 
     #endregion

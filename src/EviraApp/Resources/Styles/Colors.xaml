@@ -59,7 +59,7 @@
     <Color x:Key="BackgroundOrange">#FFF8ED</Color>
     <Color x:Key="BackgroundPink">#FFF5F5</Color>
     <Color x:Key="BackgroundYellow">#FFFEE0</Color>
-    <Color x:Key="TransparentSilver">#101010</Color>
+    <Color x:Key="TransparentSilver">#14101010</Color>
     <Color x:Key="TransparentPurple">#7210FF</Color>
     <Color x:Key="TransparentBlue">#335EF7</Color>
     <Color x:Key="TransparentOrange">#FF9800</Color>

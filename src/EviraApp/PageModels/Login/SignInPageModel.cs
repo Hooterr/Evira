@@ -2,6 +2,7 @@ using System;
 using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Evira.App.Enums;
 using Evira.App.Pages.Login;
 
 namespace Evira.App.PageModels.Login;
@@ -43,6 +44,18 @@ public partial class SignInPageModel : BasePageModel
     #endregion
     
     #region Private Methods
+
+    [RelayCommand]
+    private async Task NavigateToForgotPasswordAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(ForgotPasswordMethodPage));
+    }
+    
+    [RelayCommand]
+    private async Task SignInWithThirdPartyProviderAsync(ThirdPartySignInProvider provider)
+    {
+        await AlertHelper.ShowInfoAsync($"Singing in with {provider}");
+    }
 
     [RelayCommand]
     private async Task NavigateToSignUpAsync()

@@ -93,5 +93,11 @@
 	  <MauiXaml Update="Controls\EntryControl.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\VerificationCodeKeyboard.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Converters\Converters.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

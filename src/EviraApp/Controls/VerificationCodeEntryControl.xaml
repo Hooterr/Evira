@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Evira.App.Controls"
+             xmlns:converters="clr-namespace:Evira.App.Converters"
+             x:Class="Evira.App.Controls.VerificationCodeEntryControl"
+             x:Name="control">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:SmartBoolToObjectConverter x:Key="ColorConverter"
+                                                   FalseValue="{AppThemeBinding Light={StaticResource Greyscale200}, Dark={StaticResource DarkDark3}}"
+                                                   TrueValue="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource Primary100}}"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <HorizontalStackLayout
+        HorizontalOptions="Center"
+        HeightRequest="60"
+        x:Name="stack"
+        Spacing="16">
+        
+        <BindableLayout.ItemTemplate>
+            <DataTemplate x:DataType="controls:VerificationCodeEntryControlItem">
+                <Border StrokeShape="RoundRectangle 12"
+                        WidthRequest="{Binding Source={Reference control}, Path=ItemWidth}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale50}, Dark={StaticResource DarkDark2}}"
+                        Stroke="{Binding IsSelected, Converter={StaticResource ColorConverter}}"
+                        StrokeThickness="1">
+                    
+                    <Label HorizontalTextAlignment="Center"
+                           Text="{Binding Text}"
+                           Style="{StaticResource H4Bold}"
+                           VerticalTextAlignment="Center"/>
+                    
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </Border.GestureRecognizers>
+                    
+                </Border>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+        
+    </HorizontalStackLayout>
+    
+    
+</ContentView>

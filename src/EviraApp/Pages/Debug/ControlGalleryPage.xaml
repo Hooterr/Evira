@@ -21,6 +21,13 @@
                 <Button Text="Button MAUI -> login" Style="{StaticResource PrimaryRoundButton}" Command="{Binding OpenLoginStartCommand}"/>
                 <Button Text="BUTTON MAUI Disabled" IsEnabled="False"/>
 
+                <controls:VerificationCodeEntryControl Code="12"
+                                                       MaxItemWidth="80"
+                                                       SelectedIndex="1"
+                                                       CodeLength="2"/>
+
+                <controls:VerificationCodeKeyboard />
+
                 <controls:AppButton Text="Button no icons, enabled"></controls:AppButton>
                 <controls:AppButton Text="Button no icons, disabled" IsEnabled="False"></controls:AppButton>
                 <controls:AppButton Text="Button no icons round" Variant="Round"></controls:AppButton>

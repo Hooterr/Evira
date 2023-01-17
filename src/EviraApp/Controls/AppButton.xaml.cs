@@ -122,7 +122,6 @@ public partial class AppButton : ContentView
         {
             BackgroundView.IsEnabled = IsEnabled;
             LabelView.IsEnabled = IsEnabled;
-            Console.WriteLine($"IsEnabled is now {IsEnabled}.");
         }
     }
 }

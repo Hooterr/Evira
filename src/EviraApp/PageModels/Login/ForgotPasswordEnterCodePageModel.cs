@@ -3,6 +3,7 @@ using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Evira.App.Helpers;
+using Evira.App.Pages.Login;
 
 namespace Evira.App.PageModels.Login;
 
@@ -62,11 +63,17 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
     private async Task VerifyAsync()
     {
         timer.Stop();
+        await Shell.Current.GoToAsync($"{nameof(ForgotPasswordCreateNewPasswordPage)}");
     }
 
     [RelayCommand]
     private async Task ResendAsync()
     {
+        await ExecuteBusyAction(async () =>
+        {
+            await Task.Delay(1234);
+        });
+
         TimerValue = 60;
         timer.Start();
         IsResendVisible = false;

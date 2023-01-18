@@ -1,13 +1,62 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <abstract:BaseContentPage
     x:Class="Evira.App.Pages.AccountSetup.SetupBiometricsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
     xmlns:accountsetup="clr-namespace:Evira.App.PageModels.AccountSetup"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
     Title="{Binding Title}"
     x:DataType="accountsetup:SetupBiometricsPageModel"
-    x:TypeArguments="accountsetup:SetupBiometricsPageModel">
-    
+    x:TypeArguments="accountsetup:SetupBiometricsPageModel"
+    ControlTemplate="{StaticResource NavControlTemplate}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid RowDefinitions="*,auto"
+          ColumnSpacing="12"
+          ColumnDefinitions="*,*"
+          RowSpacing="20">
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="65"
+            Grid.ColumnSpan="2"
+            VerticalOptions="Center">
+
+            <Label
+                Style="{StaticResource BodyXLargeRegular}"
+                HorizontalTextAlignment="Center"
+                Text="Add a fingerprint to make your account more secure."/>
+
+            <Image
+                Source="fingerprint"
+                HeightRequest="250"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersBlack}, Dark={StaticResource OthersWhite}}" />
+
+            <Label
+                Style="{StaticResource BodyXLargeRegular}"
+                HorizontalTextAlignment="Center"
+                Text="Please put your finger on the fingerprint scanner to get started."/>
+
+        </VerticalStackLayout>
+
+        <controls:AppButton
+            Variant="Round"
+            Text="Skip"
+            Grid.Column="0"
+            Command="{Binding SkipCommand}"
+            Grid.Row="1"/>
+
+        <controls:AppButton
+            Grid.Column="1"
+            Variant="Round"
+            Text="Continue"
+            Command="{Binding ContinueCommand}"
+            Grid.Row="1"/>
+
+    </Grid>
+
 </abstract:BaseContentPage>

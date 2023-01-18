@@ -3,6 +3,7 @@ using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Evira.App.Enums;
+using Evira.App.Pages.AccountSetup;
 using Evira.App.Pages.Login;
 
 namespace Evira.App.PageModels.Login;
@@ -64,7 +65,8 @@ public partial class SignUpPageModel : BasePageModel
     {
         await ExecuteBusyAction(async () =>
         {
-            await Task.Delay(3000);
+            await Shell.Current.GoToAsync($"{nameof(FillProfilePage)}");
+            //await Task.Delay(3000);
         });
     }
     

@@ -1,6 +1,8 @@
 using System;
 using Evira.App.PageModels.Abstract;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Evira.App.Pages.AccountSetup;
 
 namespace Evira.App.PageModels.AccountSetup;
 
@@ -21,6 +23,7 @@ public partial class FillProfilePageModel : BasePageModel
     /// </summary>
     public FillProfilePageModel()
     {
+        Title = "Fill your profile";
     }
 
     #endregion
@@ -30,6 +33,12 @@ public partial class FillProfilePageModel : BasePageModel
     #endregion
     
     #region Private Methods
+
+    [RelayCommand]
+    private async Task ContinueAsync()
+    {
+        await Shell.Current.GoToAsync($"{nameof(CreatePinPage)}");
+    }
     
     #endregion
 }

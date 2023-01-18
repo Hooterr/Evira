@@ -1,6 +1,9 @@
 using System;
 using Evira.App.PageModels.Abstract;
+using Evira.App.Pages.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 
 namespace Evira.App.PageModels.AccountSetup;
 
@@ -21,6 +24,7 @@ public partial class SetupBiometricsPageModel : BasePageModel
     /// </summary>
     public SetupBiometricsPageModel()
     {
+        Title = "Set Your Fingerprint";
     }
 
     #endregion
@@ -30,6 +34,20 @@ public partial class SetupBiometricsPageModel : BasePageModel
     #endregion
     
     #region Private Methods
+
+    [RelayCommand]
+    private async Task ContinueAsync()
+    {
+        await MopupService.Instance.PushAsync(new CreatingAccountPopupPage());
+        await Task.Delay(3000);
+        await MopupService.Instance.PopAsync();
+    }
+
+    [RelayCommand]
+    private async Task SkipAsync()
+    {
+        
+    }
     
     #endregion
 }

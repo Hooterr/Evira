@@ -12,12 +12,20 @@ namespace Evira.App.Controls;
 [EditorBrowsable(EditorBrowsableState.Never)]
 public partial class VerificationCodeEntryControlItem : ObservableObject
 {
-    [ObservableProperty]
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(ShowHiddenSymbol))]
     private bool _isSelected;
 
-    [ObservableProperty]
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(ShowHiddenSymbol))]
     private string _text;
 
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(ShowHiddenSymbol))]
+    private bool _isObfuscated;
+
+    public bool ShowHiddenSymbol => IsObfuscated && !string.IsNullOrWhiteSpace(Text) && !IsSelected;
+
+    public VerificationCodeEntryControlItem()
+    {
+    }
 }
 
 public partial class VerificationCodeEntryControl : ContentView
@@ -96,6 +104,28 @@ public partial class VerificationCodeEntryControl : ContentView
         get => (double)GetValue(MaxItemWidthProperty);
         set => SetValue(MaxItemWidthProperty, value);
     }
+
+    public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(
+        nameof(IsPassword),
+        typeof(bool),
+        typeof(VerificationCodeEntryControl),
+        defaultValue: false,
+        propertyChanged: (b, o, n) => ((VerificationCodeEntryControl)b).IsPasswordPropertyChanged((bool)o, (bool)n));
+
+    public bool IsPassword
+    {
+        get => (bool)GetValue(IsPasswordProperty);
+        set => SetValue(IsPasswordProperty, value);
+    }
+
+    private void IsPasswordPropertyChanged(bool oldValue, bool newValue)
+    {
+        foreach (var item in Items)
+        {
+            item.IsObfuscated = newValue;
+        }
+    }
+
 
     protected override void OnSizeAllocated(double width, double height)
     {

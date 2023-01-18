@@ -2,12 +2,14 @@
 using CommunityToolkit.Maui.Markup;
 using Evira.App.AttachedProperties;
 using Evira.App.DependencyServices;
+using Evira.App.PageModels.AccountSetup;
 using Evira.App.PageModels.Debug;
 using Evira.App.PageModels.Login;
 using Evira.App.PageModels.Onboarding;
 using Evira.App.Pages.Debug;
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
+using Evira.App.Pages.AccountSetup;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
@@ -63,8 +65,12 @@ public static class MauiProgram
 		builder.Services.AddTransient<ForgotPasswordMethodPageModel>();
 		builder.Services.AddTransient<ForgotPasswordEnterCodePageModel>();
 		builder.Services.AddTransient<ForgotPasswordCreateNewPasswordPageModel>();
-		
-		builder.Services.AddTransient<ControlGalleryPage>();
+
+        builder.Services.AddTransient<FillProfilePageModel>();
+        builder.Services.AddTransient<CreatePinPageModel>();
+        builder.Services.AddTransient<SetupBiometricsPageModel>();
+
+        builder.Services.AddTransient<ControlGalleryPage>();
 		builder.Services.AddTransient<WelcomePage>();
 		builder.Services.AddTransient<WalkthroughPage>();
 		builder.Services.AddTransient<LoginStartPage>();
@@ -74,11 +80,14 @@ public static class MauiProgram
 		builder.Services.AddTransient<ForgotPasswordEnterCodePage>();
 		builder.Services.AddTransient<ForgotPasswordCreateNewPasswordPage>();
 
+        builder.Services.AddTransient<FillProfilePage>();
+        builder.Services.AddTransient<CreatePinPage>();
+        builder.Services.AddTransient<SetupBiometricsPage>();
 #if __IOS__
 		builder.Services.AddSingleton<ISafeAreaService, Evira.App.SafeAreaService>();
 #endif
 
-		Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("BorderlessEntry", (handler, view) =>
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("BorderlessEntry", (handler, view) =>
 		{
 #if __ANDROID__
 			handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);

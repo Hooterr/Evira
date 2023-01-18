@@ -1,6 +1,7 @@
 ﻿using Evira.App.Pages.Debug;
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
+using Evira.App.Pages.AccountSetup;
 
 namespace Evira.App;
 
@@ -21,8 +22,13 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ForgotPasswordMethodPage), typeof(ForgotPasswordMethodPage));
 		Routing.RegisterRoute(nameof(ForgotPasswordEnterCodePage), typeof(ForgotPasswordEnterCodePage));
 		Routing.RegisterRoute(nameof(ForgotPasswordCreateNewPasswordPage), typeof(ForgotPasswordCreateNewPasswordPage));
-		
-		InitializeComponent();
+
+		// Account
+		Routing.RegisterRoute(nameof(CreatePinPage), typeof(CreatePinPage));
+		Routing.RegisterRoute(nameof(FillProfilePage), typeof(FillProfilePage));
+		Routing.RegisterRoute(nameof(SetupBiometricsPage), typeof(SetupBiometricsPage));
+
+        InitializeComponent();
 	}
 }
 

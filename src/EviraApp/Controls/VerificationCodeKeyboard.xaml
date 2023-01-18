@@ -17,12 +17,17 @@
     </ContentView.Resources>
 
     <Grid ColumnDefinitions="*,*,*"
-          RowDefinitions="56,56,56,56">
+          ColumnSpacing="8"
+          Padding="12"
+          RowDefinitions="56,56,56,56"
+          RowSpacing="8">
 
-        <BoxView Grid.ColumnSpan="4"
-                Grid.RowSpan="4"
-                CornerRadius="40,40,0,0"
-                Color="{AppThemeBinding Light={StaticResource Greyscale50}, Dark={StaticResource DarkDark2}}"/>
+        <BoxView
+            Margin="-12"
+            Grid.ColumnSpan="4"
+            Grid.RowSpan="4"
+            CornerRadius="40,40,0,0"
+            Color="{AppThemeBinding Light={StaticResource Greyscale50}, Dark={StaticResource DarkDark2}}"/>
 
         <Label Grid.Row="0" Grid.Column="0" Text="1" Style="{StaticResource KeyboardButton}">
             <Label.GestureRecognizers>

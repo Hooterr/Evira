@@ -1,13 +1,48 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <abstract:BaseContentPage
     x:Class="Evira.App.Pages.AccountSetup.CreatePinPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
     xmlns:accountsetup="clr-namespace:Evira.App.PageModels.AccountSetup"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" xmlns:controls="clr-namespace:Evira.App.Controls"
     Title="{Binding Title}"
     x:DataType="accountsetup:CreatePinPageModel"
-    x:TypeArguments="accountsetup:CreatePinPageModel">
-    
+    x:TypeArguments="accountsetup:CreatePinPageModel"
+    ControlTemplate="{StaticResource NavControlTemplate}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        RowDefinitions="*, auto, auto"
+        RowSpacing="20"> 
+
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="60"
+                             VerticalOptions="Center">
+
+            <Label Text="Add a PIN number to make your account secure."
+                   Style="{StaticResource BodyXLargeRegular}"
+                   HorizontalTextAlignment="Center"/>
+
+            <controls:VerificationCodeEntryControl
+                Code="{Binding CodeManager.Code}"
+                IsPassword="True"
+                SelectedIndex="{Binding CodeManager.SelectedPosition}"
+                CodeLength="{Binding CodeManager.CodeLength}"/>
+
+        </VerticalStackLayout>
+
+        <controls:AppButton Grid.Row="1"
+                            Variant="Round"
+                            Command="{Binding ContinueCommand}"
+                            IsEnabled="{Binding CodeManager.IsVerifyButtonEnabled}"
+                            Text="Continue"/>
+
+        <controls:VerificationCodeKeyboard Grid.Row="2"
+                                           Command="{Binding CodeManager.KeyPressedCommand}"
+                                           DeleteCommand="{Binding CodeManager.DeletePressedCommand}"
+                                           Margin="-22,0"/>
+    </Grid>
+
 </abstract:BaseContentPage>

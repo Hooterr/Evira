@@ -9,9 +9,10 @@
     
     <ContentView.Resources>
         <ResourceDictionary>
-            <converters:SmartBoolToObjectConverter x:Key="ColorConverter"
-                                                   FalseValue="{AppThemeBinding Light={StaticResource Greyscale200}, Dark={StaticResource DarkDark3}}"
-                                                   TrueValue="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource Primary100}}"/>
+            <converters:SmartBoolToObjectConverter
+                x:Key="ColorConverter"
+                FalseValue="{AppThemeBinding Light={StaticResource Greyscale200}, Dark={StaticResource DarkDark3}}"
+                TrueValue="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource Primary100}}"/>
         </ResourceDictionary>
     </ContentView.Resources>
     
@@ -28,11 +29,23 @@
                         BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale50}, Dark={StaticResource DarkDark2}}"
                         Stroke="{Binding IsSelected, Converter={StaticResource ColorConverter}}"
                         StrokeThickness="1">
-                    
-                    <Label HorizontalTextAlignment="Center"
-                           Text="{Binding Text}"
-                           Style="{StaticResource H4Bold}"
-                           VerticalTextAlignment="Center"/>
+
+                    <Grid>
+
+                        <Ellipse HeightRequest="24"
+                                 WidthRequest="24"
+                                 Fill="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 IsVisible="{Binding ShowHiddenSymbol}"/>
+
+                        <Label HorizontalTextAlignment="Center"
+                               Text="{Binding Text}"
+                               IsVisible="{Binding ShowHiddenSymbol, Converter={StaticResource InvertedBoolConverter}}"
+                               Style="{StaticResource H4Bold}"
+                               VerticalTextAlignment="Center"/>
+
+                    </Grid>
                     
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />

@@ -115,6 +115,43 @@ public partial class AppButton : ContentView
         }
     }
 
+    public new static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(
+        nameof(BackgroundColor),
+        typeof(Color),
+        typeof(AppButton),
+        defaultValue: null,
+        propertyChanged: (b, o, v) => ((AppButton)b).BackgroundColorPropertyChanged((Color)o, (Color)v));
+
+    public new Color BackgroundColor
+    {
+        get => (Color)GetValue(BackgroundColorProperty);
+        set => SetValue(BackgroundColorProperty, value);
+    }
+
+    private void BackgroundColorPropertyChanged(Color oldValue, Color newValue)
+    {
+        BackgroundView.Color = newValue;
+    }
+
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
+        nameof(TextColor),
+        typeof(Color),
+        typeof(AppButton),
+        defaultValue: null,
+        propertyChanged: (b, o, v) => ((AppButton)b).TextColorPropertyChanged((Color)o, (Color)v));
+
+    public Color TextColor
+    {
+        get => (Color)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
+    }
+
+    private void TextColorPropertyChanged(Color oldValue, Color newValue)
+    {
+        LabelView.TextColor = newValue;
+    }
+
+    
     protected override void OnPropertyChanged(string propertyName = null)
     {
         base.OnPropertyChanged(propertyName);

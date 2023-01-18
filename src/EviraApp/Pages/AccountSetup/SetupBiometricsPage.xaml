@@ -45,6 +45,8 @@
 
         <controls:AppButton
             Variant="Round"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Primary100}, Dark={StaticResource DarkDark3}}"
+            TextColor="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource OthersWhite}}"
             Text="Skip"
             Grid.Column="0"
             Command="{Binding SkipCommand}"

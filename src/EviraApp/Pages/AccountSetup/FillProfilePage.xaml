@@ -6,6 +6,7 @@
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
     xmlns:accountsetup="clr-namespace:Evira.App.PageModels.AccountSetup"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
     Title="{Binding Title}"
     x:DataType="accountsetup:FillProfilePageModel"
     x:TypeArguments="accountsetup:FillProfilePageModel"
@@ -13,9 +14,36 @@
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
 
-    <VerticalStackLayout>
+    <Grid RowDefinitions="*, auto"
+          Padding="0,0,0,20"
+          RowSpacing="20">
 
-        <Button Command="{Binding ContinueCommand}"/>
-    </VerticalStackLayout>
+        <ScrollView
+            VerticalScrollBarVisibility="Never"
+            Grid.Row="0">
+
+            <VerticalStackLayout
+                Spacing="20">
+
+                <controls:ProfileImageControl />
+
+                <controls:EntryControl Placeholder="Full Name" Image="profile_bold" Margin="0,10,0,0"/>
+                <controls:EntryControl Placeholder="Nickname" Image="profile_bold"/>
+                <controls:EntryControl Placeholder="Date of Birth" Image="calendar_bold"/>
+                <controls:EntryControl Placeholder="Email" Image="message_bold" />
+                <controls:EntryControl Placeholder="Phone number"/>
+                <controls:EntryControl Placeholder="Gender"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <controls:AppButton
+            Command="{Binding ContinueCommand}"
+            Variant="Round"
+            Grid.Row="1"
+            Text="Continue"/>
+
+    </Grid>
 
 </abstract:BaseContentPage>

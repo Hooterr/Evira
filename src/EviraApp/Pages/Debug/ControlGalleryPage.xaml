@@ -28,6 +28,9 @@
 
                 <controls:VerificationCodeKeyboard />
 
+                <controls:ProfileImageControl/>
+                <controls:ProfileImageControl Source="https://picsum.photos/id/237/500/500"/>
+                
                 <controls:AppButton Text="Button no icons, enabled"></controls:AppButton>
                 <controls:AppButton Text="Button no icons, disabled" IsEnabled="False"></controls:AppButton>
                 <controls:AppButton Text="Button no icons round" Variant="Round"></controls:AppButton>

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView
+    x:Class="Evira.App.Controls.AppButton"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Evira.App.Controls.AppButton"
     xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     HeightRequest="56"
     IsClippedToBounds="True">
@@ -16,20 +16,21 @@
             x:Name="BackgroundView"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            CornerRadius="16"
-            Color="{AppThemeBinding Dark={StaticResource Greyscale50},
-                                    Light={StaticResource Primary500}}">
+            CornerRadius="16">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroupList>
                     <VisualStateGroup
                         x:Name="Common">
                         <VisualState
-                            x:Name="Normal" />
+                            x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Color" Value="{AppThemeBinding Dark={StaticResource Greyscale50}, Light={StaticResource Primary500}}" />
+                            </VisualState.Setters>
+                        </VisualState>
                         <VisualState
                             x:Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, 
-                                                                                                    Dark={StaticResource AlertsStatusButtonDisabled}}" />
+                                <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, Dark={StaticResource AlertsStatusButtonDisabled}}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -41,7 +42,7 @@
             x:Name="LeftImage"
             Grid.Column="1"
             attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
-                                                                           Dark={StaticResource Primary500}}"
+                                                                             Dark={StaticResource Primary500}}"
             VerticalOptions="Center" />
 
         <Label
@@ -57,7 +58,12 @@
                     <VisualStateGroup
                         x:Name="Common">
                         <VisualState
-                            x:Name="Normal" />
+                            x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OthersWhite},
+                                        Dark={StaticResource Primary500}}"/>
+                            </VisualState.Setters>
+                        </VisualState>
                         <VisualState
                             x:Name="Disabled">
                             <VisualState.Setters>
@@ -73,7 +79,7 @@
             x:Name="RightImage"
             Grid.Column="3"
             attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
-                                                                           Dark={StaticResource Primary500}}"
+                                                                             Dark={StaticResource Primary500}}"
             VerticalOptions="Center" />
 
     </Grid>

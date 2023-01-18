@@ -1,48 +1,55 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:abstract="clr-namespace:Evira.App.PageModels.Abstract">
-    
-    <ControlTemplate x:Key="NavControlTemplate">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties;assembly=Evira.App"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-        <Grid RowDefinitions="24, 48, 24, *"
-              ColumnDefinitions="24, 28, 16, *, 24"
-              ColumnSpacing="0"
-              RowSpacing="0">
-            
-            <Image Grid.Row="1"
-                   Grid.Column="1"
-                   Source="arrow_left_iconly_light_outline">
-                <Image.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"/>
-                </Image.Behaviors>
+    <ControlTemplate
+        x:Key="NavControlTemplate">
+
+        <Grid
+            ColumnDefinitions="24, 28, 16, *, 24"
+            ColumnSpacing="0"
+            RowDefinitions="24, 48, 24, *"
+            RowSpacing="0">
+
+            <Image
+                Grid.Row="1"
+                Grid.Column="1"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="arrow_left_iconly_light_outline">
                 <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{TemplateBinding BindingContext.GoBackCommand}"/>
+                    <TapGestureRecognizer
+                        Command="{TemplateBinding BindingContext.GoBackCommand}" />
                 </Image.GestureRecognizers>
             </Image>
 
-            <Label Grid.Row="1"
-                   Grid.Column="3"
-                   VerticalTextAlignment="Center"
-                   Style="{StaticResource H4Bold}"
-                   Text="{TemplateBinding BindingContext.Title}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="3"
+                Style="{StaticResource H4Bold}"
+                Text="{TemplateBinding BindingContext.Title}"
+                VerticalTextAlignment="Center" />
 
-            <ContentPresenter Grid.Row="3"
-                              Grid.Column="1"
-                              Grid.ColumnSpan="3"/>
-            
-            <ContentView 
+            <ContentPresenter
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="3" />
+
+            <ContentView
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
                 BackgroundColor="#7F000000"
-                     IsVisible="{TemplateBinding BindingContext.IsBusy}"
-                     Grid.Row="0"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="5"
-                     Grid.RowSpan="4">
-                <ActivityIndicator IsRunning="True"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"/>
+                IsVisible="{TemplateBinding BindingContext.IsBusy}">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="True"
+                    VerticalOptions="Center" />
             </ContentView>
-            
+
         </Grid>
 
     </ControlTemplate>

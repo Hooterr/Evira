@@ -2,6 +2,8 @@
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
 using Evira.App.Pages.AccountSetup;
+using Evira.App.Pages.Home;
+using Evira.App.Pages.Products;
 
 namespace Evira.App;
 
@@ -27,8 +29,12 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(CreatePinPage), typeof(CreatePinPage));
 		Routing.RegisterRoute(nameof(FillProfilePage), typeof(FillProfilePage));
 		Routing.RegisterRoute(nameof(SetupBiometricsPage), typeof(SetupBiometricsPage));
-
-        InitializeComponent();
+		
+		Routing.RegisterRoute(nameof(WhishlistPage), typeof(WhishlistPage));
+		Routing.RegisterRoute(nameof(SpecialOffersPage), typeof(SpecialOffersPage));
+		Routing.RegisterRoute(nameof(ProductsDetailsPage), typeof(ProductsDetailsPage));
+		
+		InitializeComponent();
 	}
 }
 

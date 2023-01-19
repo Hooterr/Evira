@@ -3,13 +3,24 @@ using CommunityToolkit.Maui.Markup;
 using Evira.App.AttachedProperties;
 using Evira.App.DependencyServices;
 using Evira.App.PageModels.AccountSetup;
+using Evira.App.PageModels.Cart;
 using Evira.App.PageModels.Debug;
+using Evira.App.PageModels.Home;
 using Evira.App.PageModels.Login;
 using Evira.App.PageModels.Onboarding;
+using Evira.App.PageModels.Orders;
+using Evira.App.PageModels.Products;
+using Evira.App.PageModels.Wallet;
 using Evira.App.Pages.Debug;
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
 using Evira.App.Pages.AccountSetup;
+using Evira.App.Pages.Cart;
+using Evira.App.Pages.Home;
+using Evira.App.Pages.Orders;
+using Evira.App.Pages.Products;
+using Evira.App.Pages.Profile;
+using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
@@ -70,6 +81,24 @@ public static class MauiProgram
         builder.Services.AddTransient<CreatePinPageModel>();
         builder.Services.AddTransient<SetupBiometricsPageModel>();
 
+        builder.Services.AddTransient<HomePageModel>();
+        builder.Services.AddTransient<WhishlistPageModel>();
+        builder.Services.AddTransient<SpecialOffersPageModel>();
+        
+        builder.Services.AddTransient<ProductsDetailsPageModel>();
+        builder.Services.AddTransient<SearchPageModel>();
+        builder.Services.AddTransient<FilterPopupPageModel>();
+        
+        builder.Services.AddTransient<CartPageModel>();
+
+        builder.Services.AddTransient<OrdersPageModel>();
+        
+        builder.Services.AddTransient<WalletPageModel>();
+        
+        builder.Services.AddTransient<FillProfilePageModel>();
+        
+        
+        // Pages
         builder.Services.AddTransient<ControlGalleryPage>();
 		builder.Services.AddTransient<WelcomePage>();
 		builder.Services.AddTransient<WalkthroughPage>();
@@ -83,6 +112,23 @@ public static class MauiProgram
         builder.Services.AddTransient<FillProfilePage>();
         builder.Services.AddTransient<CreatePinPage>();
         builder.Services.AddTransient<SetupBiometricsPage>();
+
+        builder.Services.AddTransient<HomePage>();
+        builder.Services.AddTransient<WhishlistPage>();
+        builder.Services.AddTransient<SpecialOffersPage>();
+        
+        builder.Services.AddTransient<ProductsDetailsPage>();
+        builder.Services.AddTransient<SearchPage>();
+        builder.Services.AddTransient<FilterPopupPage>();
+        
+        builder.Services.AddTransient<CartPage>();
+
+        builder.Services.AddTransient<OrdersPage>();
+        
+        builder.Services.AddTransient<WalletPage>();
+        
+        builder.Services.AddTransient<ProfilePage>();
+
 #if __IOS__
 		builder.Services.AddSingleton<ISafeAreaService, Evira.App.SafeAreaService>();
 #endif

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <abstract:BaseContentPage
     x:Class="Evira.App.Pages.Cart.CartPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -9,5 +9,6 @@
     Title="{Binding Title}"
     x:DataType="cart:CartPageModel"
     x:TypeArguments="cart:CartPageModel">
+    <Label Text="Cart"/>
     
 </abstract:BaseContentPage>

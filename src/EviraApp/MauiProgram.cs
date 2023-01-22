@@ -11,6 +11,7 @@ using Evira.App.PageModels.Onboarding;
 using Evira.App.PageModels.Orders;
 using Evira.App.PageModels.Products;
 using Evira.App.PageModels.Wallet;
+using Evira.App.PageModels.Profile;
 using Evira.App.Pages.Debug;
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Onboarding;
@@ -22,8 +23,8 @@ using Evira.App.Pages.Products;
 using Evira.App.Pages.Profile;
 using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
+using Evira.App.Platforms;
 
 namespace Evira.App;
 
@@ -39,6 +40,7 @@ public static class MauiProgram
 			.UseMauiCommunityToolkitMarkup()
 			.ConfigureMauiHandlers(handlers =>
 			{
+                handlers.AddHandler(typeof(Shell), typeof(MyShellRenderer));
 			})
 			.ConfigureFonts(fonts =>
 			{
@@ -95,7 +97,7 @@ public static class MauiProgram
         
         builder.Services.AddTransient<WalletPageModel>();
         
-        builder.Services.AddTransient<FillProfilePageModel>();
+        builder.Services.AddTransient<ProfilePageModel>();
         
         
         // Pages

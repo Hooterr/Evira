@@ -3,14 +3,52 @@
     x:Class="Evira.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Evira.App"
     xmlns:debug="clr-namespace:Evira.App.Pages.Debug"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:home="clr-namespace:Evira.App.Pages.Home"
+    xmlns:cart="clr-namespace:Evira.App.Pages.Cart"
+    xmlns:orders="clr-namespace:Evira.App.Pages.Orders"
+    xmlns:wallet="clr-namespace:Evira.App.Pages.Wallet"
+    xmlns:profile="clr-namespace:Evira.App.Pages.Profile"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource DarkDark3}}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource OthersWhite}}"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource DarkDark3}}"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"
+    Shell.TabBarUnselectedColor="{StaticResource Greyscale500}">
+    
+    <TabBar>
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate debug:ControlGalleryPage}"
-        Route="MainPage" />
+        <ShellContent
+            Icon="home_light"
+            Title="Home"
+            ContentTemplate="{DataTemplate home:HomePage}"
+            Route="Home"/>
+        
+        <ShellContent
+            Title="Cart"
+            Icon="bag_light"
+            ContentTemplate="{DataTemplate cart:CartPage}"
+            Route="Cart" />
+        
+        <ShellContent
+            Title="Orders"
+            Icon="buy_light"
+            ContentTemplate="{DataTemplate orders:OrdersPage}"
+            Route="Orders" />
 
+        <ShellContent
+            Title="Wallet"
+            Icon="wallet_light"
+            ContentTemplate="{DataTemplate wallet:WalletPage}"
+            Route="Wallet" />
+
+        <ShellContent
+            Title="Profile"
+            Icon="profile_light"
+            ContentTemplate="{DataTemplate debug:ControlGalleryPage}"
+            Route="Profile" />
+        
+    </TabBar>
+    
 </Shell>
 

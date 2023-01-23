@@ -67,5 +67,6 @@
     <Color x:Key="TransparentRed">#F75555</Color>
     <Color x:Key="TransparentGreen">#4CAF50</Color>
     <Color x:Key="TransparentCyan">#00BCD4</Color>
+    <Color x:Key="PageBackgroundDark">#181a20</Color>
     
 </ResourceDictionary>

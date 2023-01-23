@@ -25,6 +25,7 @@ using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using Evira.App.Platforms;
+using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 
 namespace Evira.App;
 
@@ -33,13 +34,13 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+        builder
+            .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-			.ConfigureMopups()
-			.UseMauiCommunityToolkitMarkup()
-			.ConfigureMauiHandlers(handlers =>
-			{
+            .ConfigureMopups()
+            .UseMauiCommunityToolkitMarkup()
+            .ConfigureMauiHandlers(handlers =>
+            {
                 handlers.AddHandler(typeof(Shell), typeof(MyShellRenderer));
 			})
 			.ConfigureFonts(fonts =>

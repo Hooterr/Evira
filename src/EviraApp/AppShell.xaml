@@ -9,10 +9,11 @@
     xmlns:orders="clr-namespace:Evira.App.Pages.Orders"
     xmlns:wallet="clr-namespace:Evira.App.Pages.Wallet"
     xmlns:profile="clr-namespace:Evira.App.Pages.Profile"
+    xmlns:attached="clr-namespace:Evira.App.AttachedProperties"
     Shell.FlyoutBehavior="Disabled"
-    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource DarkDark3}}"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
     Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource OthersWhite}}"
-    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource DarkDark3}}"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
     Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"
     Shell.TabBarUnselectedColor="{StaticResource Greyscale500}">
     
@@ -21,30 +22,35 @@
         <ShellContent
             Icon="home_light"
             Title="Home"
+            attached:SelectedIconProperty.Source="home_selected"
             ContentTemplate="{DataTemplate home:HomePage}"
             Route="Home"/>
         
         <ShellContent
-            Title="Cart"
+            Title="Bag"
             Icon="bag_light"
+            attached:SelectedIconProperty.Source="bag_selected"
             ContentTemplate="{DataTemplate cart:CartPage}"
             Route="Cart" />
         
         <ShellContent
-            Title="Orders"
+            Title="Cart"
             Icon="buy_light"
+            attached:SelectedIconProperty.Source="buy_selected"
             ContentTemplate="{DataTemplate orders:OrdersPage}"
             Route="Orders" />
 
         <ShellContent
             Title="Wallet"
             Icon="wallet_light"
+            attached:SelectedIconProperty.Source="wallet_selected"
             ContentTemplate="{DataTemplate wallet:WalletPage}"
             Route="Wallet" />
 
         <ShellContent
             Title="Profile"
             Icon="profile_light"
+            attached:SelectedIconProperty.Source="profile_selected"
             ContentTemplate="{DataTemplate debug:ControlGalleryPage}"
             Route="Profile" />
         

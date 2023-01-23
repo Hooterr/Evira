@@ -15,7 +15,7 @@ public abstract class BaseContentPage<T> : ContentPage where T : BasePageModel
 	protected BaseContentPage(T pageModel)
 	{
 		BindingContext = pageModel;
-		this.SetAppTheme(BackgroundColorProperty, ColorResources.Get("OthersWhite"), ColorResources.Get("DarkDark1"));
+		this.SetAppTheme(BackgroundColorProperty, ColorResources.Get("OthersWhite"), ColorResources.Get("PageBackgroundDark"));
 		
 		if (_enableSafeAreaFix)
 		{

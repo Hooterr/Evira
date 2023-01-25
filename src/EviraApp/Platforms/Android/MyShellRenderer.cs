@@ -3,8 +3,10 @@ using Android.Graphics.Drawables;
 using Android.Views;
 using Evira.App.AttachedProperties;
 using Google.Android.Material.BottomNavigation;
+using Java.Util;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
 using Microsoft.Maui.Controls.Platform.Compatibility;
+using R = Android.Resource;
 
 namespace Evira.App.Platforms;
 
@@ -67,11 +69,13 @@ public class MySellItemRenderer : ShellItemRenderer
 
         var drawable = new AnimatedStateListDrawable();
        
+        drawable.AddState(new[] { R.Attribute.StateChecked }, selectedImageResult.Value, Resource.Id.anim_state_checked);
+        drawable.AddState(new[] { -R.Attribute.StateChecked }, unselectedImageResult.Value, Resource.Id.anim_state_unchecked);
+
+        drawable.SetEnterFadeDuration(250);
+        drawable.SetExitFadeDuration(250);
+        drawable.AddTransition(Resource.Id.home_state_checked, Resource.Id.home_state_unchecked, selectedImageResult.Value, true);
         
-
-        drawable.AddState(new[] { Android.Resource.Attribute.StateChecked }, selectedImageResult.Value);
-        drawable.AddState(new[] { -Android.Resource.Attribute.StateChecked }, unselectedImageResult.Value);
-
         //menuItem.IsAlive() && 
         if (selectedImageResult is not null)
             menuItem.SetIcon(drawable);

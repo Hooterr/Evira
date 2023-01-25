@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="anim_state_checked" type="id"/>
+    <item name="anim_state_unchecked" type="id"/>    
+
+</resources>

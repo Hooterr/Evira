@@ -74,7 +74,7 @@ public class MySellItemRenderer : ShellItemRenderer
 
         drawable.SetEnterFadeDuration(250);
         drawable.SetExitFadeDuration(250);
-        drawable.AddTransition(Resource.Id.home_state_checked, Resource.Id.home_state_unchecked, selectedImageResult.Value, true);
+        drawable.AddTransition(Resource.Id.anim_state_checked, Resource.Id.anim_state_unchecked, selectedImageResult.Value, true);
         
         //menuItem.IsAlive() && 
         if (selectedImageResult is not null)

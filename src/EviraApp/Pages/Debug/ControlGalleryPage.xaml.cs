@@ -8,6 +8,7 @@ public partial class ControlGalleryPage : BaseContentPage<ControlGalleryPageMode
 	public ControlGalleryPage(ControlGalleryPageModel pageModel) : base(pageModel)
 	{
 		InitializeComponent();
+		/*
 		var dict = Application.Current!.Resources.MergedDictionaries.ElementAt(1);
 
 		var keys = dict.Keys.ToList();
@@ -23,6 +24,7 @@ public partial class ControlGalleryPage : BaseContentPage<ControlGalleryPageMode
 				});
 			}
 		}
+		*/
 
 	}
 }

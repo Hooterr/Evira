@@ -4,12 +4,197 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
     xmlns:home="clr-namespace:Evira.App.PageModels.Home"
+    xmlns:models="clr-namespace:Evira.App.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="{Binding Title}"
     x:DataType="home:HomePageModel"
     x:TypeArguments="home:HomePageModel"
     Shell.NavBarIsVisible="False">
 
-    <Label Text="Home"/>
+
+    <Grid
+        Padding="0,32,0,0"
+        RowDefinitions="auto, 56, *"
+        RowSpacing="25">
+
+        <Grid
+            Grid.Row="0"
+            Padding="16,0"
+            ColumnDefinitions="52, *, 28, 28"
+            ColumnSpacing="16"
+            RowDefinitions="26, 26"
+            RowSpacing="0">
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Source="https://picsum.photos/56">
+                <Image.Clip>
+                    <EllipseGeometry
+                        Center="26,26"
+                        RadiusX="26"
+                        RadiusY="26" />
+                </Image.Clip>
+            </Image>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BodyLargeMedium}"
+                Text="Good Morning 👋"
+                TextColor="{StaticResource Greyscale600}"
+                VerticalTextAlignment="Start" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource H5Bold}"
+                Text="Max Verstappen"
+                VerticalTextAlignment="End" />
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Source="notification_bold"
+                VerticalOptions="Center" />
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="3"
+                Source="heart_bold"
+                VerticalOptions="Center" />
+
+        </Grid>
+
+        <ContentView
+            Grid.Row="1"
+            Padding="16,0">
+
+            <Border
+                BackgroundColor="{StaticResource Greyscale100}"
+                StrokeShape="RoundRectangle 12">
+
+                <HorizontalStackLayout
+                    Padding="16,0"
+                    Spacing="12"
+                    VerticalOptions="Center">
+
+                    <Image
+                        attachedProperties:TintedImageEffect.TintColor="{StaticResource Greyscale400}"
+                        Source="search_bold" />
+
+                    <Label
+                        Style="{StaticResource BodyMediumRegular}"
+                        Text="Search"
+                        TextColor="{StaticResource Greyscale400}"
+                        VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+
+            </Border>
+
+        </ContentView>
+
+        <ScrollView
+            Grid.Row="2"
+            Orientation="Vertical">
+
+            <VerticalStackLayout
+                Spacing="24">
+
+                <Grid
+                    Padding="16,0"
+                    ColumnDefinitions="*, auto">
+
+                    <Label
+                        Grid.Column="0"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource H5Bold}"
+                        Text="Special offers" />
+
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource BodyLargeBold}"
+                        Text="See all"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+
+                <Grid
+                    RowDefinitions="*, auto, 8"
+                    RowSpacing="0">
+
+                    <CarouselView
+                        x:Name="carousel"
+                        Grid.Row="0"
+                        Loop="False"
+                        Grid.RowSpan="3"
+                        HeightRequest="180"
+                        ItemsSource="{Binding SpecialOffers}">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout
+                                ItemSpacing="24"
+                                Orientation="Horizontal"
+                                SnapPointsAlignment="Center"
+                                SnapPointsType="MandatorySingle" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="models:HomeSpecialOfferModel">
+                                <Border
+                                    BackgroundColor="{StaticResource Primary100}"
+                                    StrokeShape="RoundRectangle 32">
+                                    <Grid
+                                        Padding="32,0,16,0"
+                                        ColumnDefinitions="1.3*,*">
+
+                                        <Image
+                                            Grid.ColumnSpan="2"
+                                            HorizontalOptions="End"
+                                            Source="{Binding Image}" />
+
+                                        <VerticalStackLayout
+                                            Spacing="12"
+                                            VerticalOptions="Center">
+
+                                            <Label
+                                                Style="{StaticResource H2Bold}"
+                                                Text="{Binding Title}" />
+
+                                            <Label
+                                                Style="{StaticResource H6Bold}"
+                                                Text="{Binding SubTitle}" />
+
+                                            <Label
+                                                Style="{StaticResource BodySmallMedium}"
+                                                Text="{Binding Content}" />
+
+                                        </VerticalStackLayout>
+
+                                    </Grid>
+
+                                </Border>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+
+                    </CarouselView>
+
+                    <controls:CustomStepper
+                        Grid.Row="1"
+                        Current="{Binding Source={Reference carousel},
+                                          Path=Position}"
+                        HorizontalOptions="Center"
+                        Size="{Binding SpecialOffers.Count}" />
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+    </Grid>
+
 </abstract:BaseContentPage>

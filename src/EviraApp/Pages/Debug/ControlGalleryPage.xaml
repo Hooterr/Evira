@@ -45,7 +45,7 @@
                 
                 <controls:AppButton Text="Button right and left icon, enabled" RightImageSource="arrow_right_bold" LeftImageSource="arrow_left_bold"></controls:AppButton>
 
-                <controls:CustomStepper Current="1" Size="5"
+                <controls:CustomStepper Current="1" Count="5"
                                         HorizontalOptions="Center"/>
 
                 <controls:CheckboxControl IsChecked="True"

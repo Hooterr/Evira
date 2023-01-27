@@ -103,5 +103,8 @@
 		<MauiXaml Update="Pages\Popups\CreatingAccountPopupPage.xaml">
 			<SubType></SubType>
 		</MauiXaml>
+		<MauiXaml Update="Controls\ChipCarouselView.xaml">
+		  <SubType></SubType>
+		</MauiXaml>
 	</ItemGroup>
 </Project>

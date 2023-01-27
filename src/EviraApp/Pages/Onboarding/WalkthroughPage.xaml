@@ -65,10 +65,12 @@
                 Spacing="30">
 
                 <controls:CustomStepper
+                    IndicatorColor="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}"
+                    DotsColor="{AppThemeBinding Light={StaticResource Greyscale300}, Dark={StaticResource DarkDark3}}"
                     Current="{Binding CurrentStep}"
                     HeightRequest="10"
                     HorizontalOptions="Center"
-                    Size="{Binding Steps.Count}" />
+                    Count="{Binding Steps.Count}" />
 
                 <Button
                     Command="{Binding NextCommand}"

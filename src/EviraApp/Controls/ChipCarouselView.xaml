@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Evira.App.Controls.ChipCarouselView"
+             xmlns:controls="clr-namespace:Evira.App.Controls"
+             x:Name="control">
+
+    <ScrollView Orientation="Horizontal"
+                Padding="14,-2"
+                HeightRequest="38"
+                HorizontalScrollBarVisibility="Never">
+
+        <HorizontalStackLayout
+            BindableLayout.ItemsSource="{Binding Source={Reference control}, Path=ItemsSource}"
+            Spacing="10">
+            <BindableLayout.ItemTemplate>
+
+                <DataTemplate
+                    x:DataType="controls:IChipItem">
+
+                    <Border StrokeShape="RoundRectangle 17"
+                            Stroke="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource DarkDark3}}"
+                            Padding="17,0"
+                            StrokeThickness="2">
+
+                        <Border.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}"
+                                         Value="True"
+                                         TargetType="Border">
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource DarkDark3}}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding IsSelected}"
+                                         Value="False"
+                                         TargetType="Border">
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </DataTrigger>
+
+                        </Border.Triggers>
+
+                        <controls:DataTemplatedView
+                            DataTemplate="{Binding Source={Reference control}, Path=ItemTemplate}" />
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+
+                        </Border.GestureRecognizers>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+
+    </ScrollView>
+</ContentView>
+

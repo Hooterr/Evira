@@ -12,6 +12,7 @@
     Title="{Binding Title}"
     x:DataType="home:HomePageModel"
     x:TypeArguments="home:HomePageModel"
+    x:Name="page"
     Shell.NavBarIsVisible="False">
 
 
@@ -122,6 +123,10 @@
                         Style="{StaticResource BodyLargeBold}"
                         Text="See all"
                         VerticalTextAlignment="Center" />
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SeeAllSpecialOffersCommand}" />
+                    </Grid.GestureRecognizers>
                 </Grid>
 
                 <Grid
@@ -131,10 +136,10 @@
                     <CarouselView
                         x:Name="carousel"
                         Grid.Row="0"
-                        Loop="False"
                         Grid.RowSpan="3"
                         HeightRequest="180"
-                        ItemsSource="{Binding SpecialOffers}">
+                        ItemsSource="{Binding SpecialOffers}"
+                        Loop="False">
                         <CarouselView.ItemsLayout>
                             <LinearItemsLayout
                                 ItemSpacing="24"
@@ -145,39 +150,9 @@
                         <CarouselView.ItemTemplate>
                             <DataTemplate
                                 x:DataType="models:HomeSpecialOfferModel">
-                                <Border
-                                    BackgroundColor="{StaticResource Primary100}"
-                                    StrokeShape="RoundRectangle 32">
-                                    <Grid
-                                        Padding="32,0,16,0"
-                                        ColumnDefinitions="1.3*,*">
-
-                                        <Image
-                                            Grid.ColumnSpan="2"
-                                            HorizontalOptions="End"
-                                            Source="{Binding Image}" />
-
-                                        <VerticalStackLayout
-                                            Spacing="12"
-                                            VerticalOptions="Center">
-
-                                            <Label
-                                                Style="{StaticResource H2Bold}"
-                                                Text="{Binding Title}" />
-
-                                            <Label
-                                                Style="{StaticResource H6Bold}"
-                                                Text="{Binding SubTitle}" />
-
-                                            <Label
-                                                Style="{StaticResource BodySmallMedium}"
-                                                Text="{Binding Content}" />
-
-                                        </VerticalStackLayout>
-
-                                    </Grid>
-
-                                </Border>
+                                <controls:SpecialOfferView
+                                    Command="{Binding Source={Reference page}, Path=BindingContext.SelectSpecialOfferCommand}"
+                                    Model="{Binding}" />
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
 
@@ -185,12 +160,119 @@
 
                     <controls:CustomStepper
                         Grid.Row="1"
-                        Current="{Binding Source={Reference carousel},
-                                          Path=Position}"
+                        Count="{Binding SpecialOffers.Count}"
+                        Current="{Binding Source={Reference carousel}, Path=Position}"
+                        DotsColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                    Dark={StaticResource DarkDark2}}"
                         HorizontalOptions="Center"
-                        Size="{Binding SpecialOffers.Count}" />
+                        IndicatorColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                         Dark={StaticResource Greyscale400}}"
+                        Size="5" />
 
                 </Grid>
+
+                <ContentView Padding="16,0">
+                    
+                    <CollectionView
+                        VerticalScrollBarVisibility="Never"
+                        ItemsSource="{Binding Categories}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                HorizontalItemSpacing="24"
+                                VerticalItemSpacing="24"
+                                Span="4" />
+                        </CollectionView.ItemsLayout>
+                            
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:HomeCategoryModel">
+                                <Grid
+                                    ColumnSpacing="0"
+                                    ColumnDefinitions="8,64,8"
+                                    RowDefinitions="64,auto"
+                                    RowSpacing="12">
+
+                                    <BoxView Grid.Row="0"
+                                             Grid.Column="1"
+                                             CornerRadius="32"
+                                             Color="{AppThemeBinding Light={StaticResource Greyscale300}, Dark={StaticResource DarkDark3}}"/>
+
+                                    <Image Source="{Binding Icon}"
+                                           attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900}, Dark={StaticResource OthersWhite}}"
+                                           Grid.Column="1"
+                                           WidthRequest="28"
+                                           HeightRequest="28"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Grid.Row="0"/>
+
+                                    <Label Text="{Binding Name}"
+                                           Style="{StaticResource BodyLargeBold}"
+                                           TextColor="{AppThemeBinding Light={StaticResource Greyscale800}, Dark={StaticResource Greyscale50}}"
+                                           HorizontalTextAlignment="Center"
+                                           MaxLines="1"
+                                           LineBreakMode="TailTruncation"
+                                           Grid.Column="1"
+                                           Grid.Row="1"/>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={Reference page}, Path=BindingContext.SelectCategoryCommand}"
+                                                              CommandParameter="{Binding}"/>
+                                    </Grid.GestureRecognizers>
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ContentView>
+
+                <Grid
+                    Padding="16,0"
+                    ColumnDefinitions="*, auto">
+
+                    <Label
+                        Grid.Column="0"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource H5Bold}"
+                        Text="Most popular" />
+
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource BodyLargeBold}"
+                        Text="See all"
+                        VerticalTextAlignment="Center" />
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SeeAllSpecialOffersCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <controls:ChipCarouselView
+                    ItemSelectedCommand="{Binding SelectCategoryFilterCommand}"
+                    ItemsSource="{Binding CategoryFilters}">
+                    <controls:ChipCarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CategoryFilterItemModel">
+                            <Label Text="{Binding Name}"
+                                   TextColor="{StaticResource OthersWhite}"
+                                   Style="{StaticResource BodyLargeSemiBold}"
+                                   VerticalTextAlignment="Center">
+                                <Label.Triggers>
+                                    
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+
+                            </Label>
+                        </DataTemplate>
+
+                    </controls:ChipCarouselView.ItemTemplate>
+                </controls:ChipCarouselView>
+
+                <BoxView HeightRequest="300"/>
 
             </VerticalStackLayout>
 

@@ -1,26 +1,26 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using CommunityToolkit.Maui.Markup;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace Evira.App.Controls;
 
 public class CustomStepper : ContentView
 {
-	private readonly StackLayout _stackLayout;
-	private readonly BoxView _currentStepView;
-	private readonly int _size = 10;
-
+	private StackLayout _stackLayout;
+	private BoxView _currentStepView;
+	
 	public CustomStepper()
 	{
 		_stackLayout = new()
 		{
 			Orientation = StackOrientation.Horizontal,
-			Spacing = _size,
+			Spacing = Size,
 		};
 
 		_currentStepView = new BoxView()
 		{
-			WidthRequest = _size * 3,
-			CornerRadius = _size / 2f,
-			HeightRequest = _size,
+			WidthRequest = Size * 3,
+			CornerRadius = Size / 2f,
+			HeightRequest = Size,
 			HorizontalOptions = LayoutOptions.Start,
 		};
 
@@ -30,8 +30,8 @@ public class CustomStepper : ContentView
 			_currentStepView,
 		};
 
-        _currentStepView.SetAppTheme(BoxView.ColorProperty, Color.FromArgb("#313130"), Colors.White);
-		}
+        _currentStepView.Bind(BoxView.ColorProperty, IndicatorColorProperty.PropertyName, source: this);
+	}
 
     public static readonly BindableProperty CurrentProperty = BindableProperty.Create(
 		nameof(Current),
@@ -52,24 +52,23 @@ public class CustomStepper : ContentView
 		_currentStepView.IsVisible = newValue != null;
 		if (newValue.HasValue)
 		{
-			_currentStepView.TranslateTo(newValue.Value * 2 * _size, 0);
+			_currentStepView.TranslateTo(newValue.Value * 2 * Size, 0);
 		}
 	}
 
-	public static readonly BindableProperty SizeProperty = BindableProperty.Create(
-		nameof(Size),
+	public static readonly BindableProperty CountProperty = BindableProperty.Create(
+		nameof(Count),
 		typeof(int),
 		typeof(CustomStepper),
 		defaultValue: 0,
-		propertyChanged: (b, o, n) => ((CustomStepper)b).SizePropertyChanged((int)o, (int)n));
+		propertyChanged: (b, o, n) => ((CustomStepper)b).CountPropertyChanged((int)o, (int)n));
 
-	public int Size
+	public int Count
 	{
-		get => (int)GetValue(SizeProperty);
-		set => SetValue(SizeProperty, value);
+		get => (int)GetValue(CountProperty);
+		set => SetValue(CountProperty, value);
 	}
-
-
+	
 	private int? CoerceCurrentValue(int? value)
 	{
 		if (value == null)
@@ -77,15 +76,15 @@ public class CustomStepper : ContentView
 			return value;
 		}
 
-		if (Size == 0)
+		if (Count == 0)
 		{
 			return null;
 		}
 
-		return Math.Min(value.Value, Size);
+		return Math.Min(value.Value, Count);
 	}
 
-    private void SizePropertyChanged(int oldValue, int newValue)
+    private void CountPropertyChanged(int oldValue, int newValue)
 	{
 		_stackLayout.Children.Clear();
 
@@ -100,15 +99,78 @@ public class CustomStepper : ContentView
         }
 	}
 
+    public static readonly BindableProperty SizeProperty = BindableProperty.Create(
+	    nameof(Size),
+	    typeof(double),
+	    typeof(CustomStepper),
+	    defaultValue: 10d,
+	    propertyChanged: (b, o, v) => ((CustomStepper)b).SizePropertyChanged((double)o, (double)v));
+
+    public double Size
+    {
+	    get => (double)GetValue(SizeProperty);
+	    set => SetValue(SizeProperty, value);
+    }
+
+    private void SizePropertyChanged(double oldValue, double newValue)
+    {
+	    _stackLayout.Spacing = newValue;
+	    _currentStepView.WidthRequest = 3 * newValue;
+	    _currentStepView.HeightRequest = newValue;
+	    _currentStepView.CornerRadius = newValue / 2d;
+
+	    foreach (var item in _stackLayout.Children)
+	    {
+		    if (item is not VisualElement ve)
+		    {
+			    continue;
+		    }
+		    
+		    ve.HeightRequest = newValue;
+		    ve.WidthRequest = newValue;
+	    }
+
+	    if (Current != null)
+	    {
+		    _currentStepView.TranslationX = Current.Value * 2 * newValue;
+	    }
+    }
+
+    public static readonly BindableProperty IndicatorColorProperty = BindableProperty.Create(
+	    nameof(IndicatorColor),
+	    typeof(Color),
+	    typeof(CustomStepper),
+	    defaultValue: Colors.Black);
+
+    public Color IndicatorColor
+    {
+	    get => (Color)GetValue(IndicatorColorProperty);
+	    set => SetValue(IndicatorColorProperty, value);
+    }
+
+    
+    public static readonly BindableProperty DotsColorProperty = BindableProperty.Create(
+	    nameof(DotsColor),
+	    typeof(Color),
+	    typeof(CustomStepper),
+	    defaultValue: Colors.White);
+
+    public Color DotsColor
+    {
+	    get => (Color)GetValue(DotsColorProperty);
+	    set => SetValue(DotsColorProperty, value);
+    }
+
+    
 	private Ellipse CreateBullet()
 	{
 		var result = new Ellipse()
 		{
-			HeightRequest = _size,
-			WidthRequest = _size,
+			HeightRequest = Size,
+			WidthRequest = Size,
 		};
 
-		result.SetAppTheme(Ellipse.FillProperty, Color.FromArgb("#E0E0E0"), Color.FromArgb("#35383F")); // TODO remove hardcoded values
+		result.Bind(Shape.FillProperty, nameof(DotsColor), source: this);
 		return result;
 	}
 

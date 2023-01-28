@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Evira.App.Controls.ProductsCardView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    x:Name="control">
+
+    <Grid
+        Padding="16,0"
+        ColumnDefinitions="162"
+        RowDefinitions="162,24,24,24"
+        RowSpacing="12">
+
+        <Border
+            Grid.Row="0"
+            Padding="18"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver}, Dark={StaticResource DarkDark3 }}"
+            StrokeShape="RoundRectangle 24">
+
+            <Image
+                Source="{Binding Source={Reference control},
+                                 Path=ImageSource}" />
+
+        </Border>
+
+        <Border
+            Grid.Row="0"
+            Margin="16"
+            BackgroundColor="{StaticResource DarkDark1}"
+            HeightRequest="28"
+            HorizontalOptions="End"
+            StrokeShape="RoundRectangle 14"
+            StrokeThickness="0"
+            VerticalOptions="Start"
+            WidthRequest="28">
+
+            <Image
+                attachedProperties:TintedImageEffect.TintColor="{StaticResource OthersWhite}"
+                HeightRequest="16"
+                Source="heart_iconly_light_outline"
+                WidthRequest="16" />
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                   Command="{Binding Source={Reference control},
+                                  Path=FavouriteCommand}"
+                CommandParameter="{Binding Source={Reference control},
+                                           Path=CommandParameter}"/>
+            </Border.GestureRecognizers>
+
+        </Border>
+
+        <Label
+            Grid.Row="1"
+            LineBreakMode="TailTruncation"
+            MaxLines="1"
+            Style="{StaticResource H6Bold}"
+            Text="{Binding Source={Reference control},
+                           Path=Name}" />
+
+        <HorizontalStackLayout
+            Grid.Row="2"
+            Spacing="12">
+
+            <Grid>
+
+                <Image
+                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale500},Dark={StaticResource Greyscale700}}"
+                    Source="star_bold"
+                    WidthRequest="24" />
+
+                <Image
+                    x:Name="ratingImage"
+                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Dark={StaticResource Greyscale300}}"
+                    WidthRequest="24"
+                    Source="star_bold"/>
+
+            </Grid>
+
+            <Label
+                Style="{StaticResource BodyMediumMedium}"
+                Text="{Binding Source={Reference control},
+                               Path=Rating,
+                               StringFormat='{0:N1}'}"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale700}, Dark={StaticResource Greyscale300}}"
+                VerticalTextAlignment="Center" />
+
+            <Label
+                Style="{StaticResource BodyMediumMedium}"
+                Text="|"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale700}, Dark={StaticResource Greyscale300}}"
+                VerticalTextAlignment="Center" />
+
+            <Border
+                Padding="12,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource TransparentSilver}, Dark={StaticResource DarkDark3}}"
+                StrokeShape="RoundRectangle 6"
+                StrokeThickness="0">
+
+                <Label
+                    Style="{StaticResource BodyXSmallSemiBold}"
+                    Text="{Binding Source={Reference control},
+                                   Path=SoldCount,
+                                   StringFormat='{}{0:N0} sold'}"
+                    TextColor="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource OthersWhite}}"
+                    VerticalTextAlignment="Center" />
+
+            </Border>
+
+        </HorizontalStackLayout>
+
+        <Label
+            Grid.Row="3"
+            Style="{StaticResource H6Bold}"
+            Text="{Binding Source={Reference control},
+                           Path=Price,
+                           StringFormat='{0:C2}'}" />
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={Reference control},
+                                  Path=Command}"
+                CommandParameter="{Binding Source={Reference control},
+                                           Path=CommandParameter}" />
+        </Grid.GestureRecognizers>
+
+    </Grid>
+</ContentView>

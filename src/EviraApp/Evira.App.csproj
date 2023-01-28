@@ -81,10 +81,12 @@
 	  <Folder Include="Pages\Abstract\" />
 	  <Folder Include="Pages\Debug\" />
 	  <Folder Include="PageModels\Debug\" />
-	  <Folder Include="Controls\" />
 	  <Folder Include="Helpers\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Controls\ProductsCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Debug\ControlGalleryPage.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>

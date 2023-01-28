@@ -1,8 +1,7 @@
-using System;
-using Evira.App.PageModels.Abstract;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Evira.App.Models;
+using Evira.App.PageModels.Abstract;
+using System.Collections.ObjectModel;
 
 namespace Evira.App.PageModels.Home;
 
@@ -11,7 +10,7 @@ public partial class HomePageModel : BasePageModel
     #region Private Members
 
     #endregion
-    
+
     #region Public Properties
 
     public List<HomeSpecialOfferModel> SpecialOffers { get; }
@@ -19,6 +18,8 @@ public partial class HomePageModel : BasePageModel
     public List<HomeCategoryModel> Categories { get; }
 
     public List<CategoryFilterItemModel> CategoryFilters { get; }
+
+    public ObservableCollection<HomeProductModel> Products { get; }
 
     #endregion
 
@@ -29,6 +30,76 @@ public partial class HomePageModel : BasePageModel
     /// </summary>
     public HomePageModel()
     {
+        var random = new Random();
+        Products = new ObservableCollection<HomeProductModel>(new List<HomeProductModel>
+        {
+            new()
+            {
+                Name = "Snake Leather Bag",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Suga Leather Shoes",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Leather Casual Suit",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Black Leather Bag",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Airtight Microphone",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Black Nike Shoes",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Snake Leather Bag",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+            new()
+            {
+                Name = "Snake Leather Bag",
+                Rating = random.NextDouble()*5.0,
+                SoldCount = random.Next(0, 10_000_000),
+                Price = random.Next(0, 10000),
+                ImageSource = "banner" + random.Next(1, 5).ToString()
+            },
+
+        });
+
         Categories = new List<HomeCategoryModel>
         {
             new()
@@ -71,9 +142,8 @@ public partial class HomePageModel : BasePageModel
                 Name = "Toys",
                 Icon = "toys",
             }
-            
-        };
 
+        };
         CategoryFilters = new List<CategoryFilterItemModel>
         {
             new()
@@ -148,11 +218,11 @@ public partial class HomePageModel : BasePageModel
     }
 
     #endregion
-    
+
     #region Public Methods
-    
+
     #endregion
-    
+
     #region Private Methods
 
     [RelayCommand]
@@ -184,6 +254,18 @@ public partial class HomePageModel : BasePageModel
         }
         item.IsSelected = true;
 
+    }
+
+    [RelayCommand]
+    private async Task SelectProductAsync(HomeProductModel item)
+    {
+        await AlertHelper.ShowInfoAsync("SelectProductAsync: " + item.Name);
+    }
+
+    [RelayCommand]
+    private async Task SelectFavoriteProductAsync(HomeProductModel item)
+    {
+        await AlertHelper.ShowInfoAsync("SelectFavoriteProductAsync: " + item.Name);
     }
 
     #endregion

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Evira.App.Controls.ProductsCardPlaceholderView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="control"
+        HeightRequest="270"
+    WidthRequest="194">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0"
+                                 x:Key="gradient">
+                <GradientStop Offset="0.0" Color="Transparent" />
+                <GradientStop Offset="0.4" Color="{AppThemeBinding Light={StaticResource Greyscale300},
+                                              Dark={StaticResource DarkDark2}}" />
+                <GradientStop Offset="0.6" Color="{AppThemeBinding Light={StaticResource Greyscale300},
+                                              Dark={StaticResource DarkDark2}}" />
+                <GradientStop Offset="1.0" Color="Transparent" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <Grid
+        Padding="16,0"
+        ColumnDefinitions="162"
+        HorizontalOptions="Start"
+        IsClippedToBounds="True"
+        RowDefinitions="162,24,24,24"
+        RowSpacing="12">
+
+        <Border
+            Grid.Row="0"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                              Dark={StaticResource DarkDark3}}"
+            StrokeShape="RoundRectangle 24">
+            
+            <Border
+                x:Name="animationElement1"
+                Grid.Row="1"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                Background="{StaticResource gradient}"
+                BindingContext="{Binding Source={Reference control}}"
+                TranslationX="-120"
+                HorizontalOptions="Start"
+                WidthRequest="120">
+            </Border>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                              Dark={StaticResource DarkDark3}}"
+            StrokeShape="RoundRectangle 8">
+
+            <Border
+                x:Name="animationElement2"
+                Grid.Row="1"
+                Opacity="1.0"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                Background="{StaticResource gradient}"
+                BindingContext="{Binding Source={Reference control}}"
+                TranslationX="-120"
+                HorizontalOptions="Start"
+                WidthRequest="120">
+            </Border>
+            
+        </Border>
+
+        <Border
+            Grid.Row="2"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                              Dark={StaticResource DarkDark3}}"
+            StrokeShape="RoundRectangle 8">
+            <Border
+                x:Name="animationElement3"
+                Grid.Row="1"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                Background="{StaticResource gradient}"
+                BindingContext="{Binding Source={Reference control}}"
+                TranslationX="-120"
+                HorizontalOptions="Start"
+                WidthRequest="120">
+            </Border>
+        </Border>
+
+        <Border
+            Grid.Row="3"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                              Dark={StaticResource DarkDark3}}"
+            StrokeShape="RoundRectangle 8">
+            <Border
+                x:Name="animationElement4"
+                Grid.Row="1"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                Background="{StaticResource gradient}"
+                BindingContext="{Binding Source={Reference control}}"
+                TranslationX="-120"
+                HorizontalOptions="Start"
+                WidthRequest="120">
+            </Border>
+        </Border>
+
+    </Grid>
+</ContentView>

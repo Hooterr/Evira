@@ -84,6 +84,9 @@
 	  <Folder Include="Helpers\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Controls\ProductsCardPlaceholderView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\ProductsCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

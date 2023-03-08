@@ -25,8 +25,6 @@ using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using Evira.App.Platforms;
-using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
-
 namespace Evira.App;
 
 public static class MauiProgram

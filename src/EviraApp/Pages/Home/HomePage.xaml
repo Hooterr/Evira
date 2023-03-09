@@ -15,15 +15,15 @@
     x:TypeArguments="home:HomePageModel"
     Shell.NavBarIsVisible="False">
 
-
     <Grid
-        Padding="0,32,0,0"
-        RowDefinitions="auto, 56, *"
-        RowSpacing="25">
+        x:Name="mainGrid"
+        RowDefinitions="auto, 89, *"
+        RowSpacing="0">
 
         <Grid
+            x:Name="headerView"
             Grid.Row="0"
-            Padding="16,0"
+            Padding="16,32,16,0"
             ColumnDefinitions="52, *, 28, 28"
             ColumnSpacing="16"
             RowDefinitions="26, 26"
@@ -74,127 +74,165 @@
         </Grid>
 
         <ContentView
+            x:Name="searchView"
             Grid.Row="1"
-            Padding="16,0">
+            Padding="16"
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
+            ZIndex="2">
 
             <Border
-                BackgroundColor="{StaticResource Greyscale100}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale100},
+                                                  Dark={StaticResource DarkDark2}}"
                 StrokeShape="RoundRectangle 12">
 
-                <HorizontalStackLayout
-                    Padding="16,0"
-                    Spacing="12"
+                <Grid
+                    Padding="18,0"
+                    ColumnDefinitions="auto,*,auto"
+                    ColumnSpacing="12"
                     VerticalOptions="Center">
 
                     <Image
-                        attachedProperties:TintedImageEffect.TintColor="{StaticResource Greyscale400}"
-                        Source="search_bold" />
+                        Grid.Column="0"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                                                         Dark={StaticResource Greyscale600}}"
+                        Source="search_iconly_light_outline" />
 
                     <Label
+                        Grid.Column="1"
                         Style="{StaticResource BodyMediumRegular}"
                         Text="Search"
-                        TextColor="{StaticResource Greyscale400}"
+                        TextColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                    Dark={StaticResource Greyscale600}}"
                         VerticalTextAlignment="Center" />
-                </HorizontalStackLayout>
+
+                    <Image
+                        Grid.Column="2"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                                                         Dark={StaticResource OthersWhite}}"
+                        Source="filter_iconly_light_outline">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding NotificationsTappedCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </Grid>
+
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SearchTappedCommand}" />
+                </Border.GestureRecognizers>
 
             </Border>
 
         </ContentView>
+        
+        <CollectionView
+            x:Name="mainCollection"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            ItemsSource="{Binding Products}"
+            RemainingItemsThreshold="2"
+            RemainingItemsThresholdReachedCommand="{Binding InfiniteScrollReachedCommand}"
+            Scrolled="MainCollection_Scrolled">
 
-        <ScrollView
-            Grid.Row="2"
-            Orientation="Vertical">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
 
-            <VerticalStackLayout
-                Spacing="24">
+            <CollectionView.Header>
+                <VerticalStackLayout
+                    Padding="0,0,0,16"
+                    Spacing="0">
 
-                <Grid
-                    Padding="16,0"
-                    ColumnDefinitions="*, auto">
+                    <ContentView
+                        x:Name="contentSpacer" />
 
-                    <Label
-                        Grid.Column="0"
-                        HorizontalOptions="StartAndExpand"
-                        Style="{StaticResource H5Bold}"
-                        Text="Special offers" />
+                    <Grid
+                        Padding="16,0"
+                        ColumnDefinitions="*, auto">
 
-                    <Label
-                        Grid.Column="1"
-                        Style="{StaticResource BodyLargeBold}"
-                        Text="See all"
-                        VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Column="0"
+                            HorizontalOptions="StartAndExpand"
+                            Style="{StaticResource H5Bold}"
+                            Text="Special offers" />
 
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding SeeAllSpecialOffersCommand}" />
-                    </Grid.GestureRecognizers>
-                </Grid>
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource BodyLargeBold}"
+                            Text="See all"
+                            VerticalTextAlignment="Center" />
 
-                <Grid
-                    RowDefinitions="*, auto, 8"
-                    RowSpacing="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding SeeAllSpecialOffersCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
 
-                    <CarouselView
-                        x:Name="carousel"
-                        Grid.Row="0"
-                        Grid.RowSpan="3"
-                        HeightRequest="180"
-                        ItemsSource="{Binding SpecialOffers}"
-                        Loop="False">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout
-                                ItemSpacing="24"
-                                Orientation="Horizontal"
-                                SnapPointsAlignment="Center"
-                                SnapPointsType="MandatorySingle" />
-                        </CarouselView.ItemsLayout>
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate
-                                x:DataType="models:HomeSpecialOfferModel">
-                                <controls:SpecialOfferView
-                                    Command="{Binding Source={Reference page},
-                                                      Path=BindingContext.SelectSpecialOfferCommand}"
-                                    Model="{Binding}" />
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
+                    <Grid
+                        Padding="0,24,0,0"
+                        RowDefinitions="*, auto, 8"
+                        RowSpacing="0">
 
-                    </CarouselView>
+                        <CarouselView
+                            x:Name="carousel"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            HeightRequest="180"
+                            ItemsSource="{Binding SpecialOffers}"
+                            Loop="False">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout
+                                    ItemSpacing="24"
+                                    Orientation="Horizontal"
+                                    SnapPointsAlignment="Center"
+                                    SnapPointsType="MandatorySingle" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate
+                                    x:DataType="models:HomeSpecialOfferModel">
+                                    <controls:SpecialOfferView
+                                        Command="{Binding Source={Reference page},
+                                                          Path=BindingContext.SelectSpecialOfferCommand}"
+                                        Model="{Binding}" />
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
 
-                    <controls:CustomStepper
-                        Grid.Row="1"
-                        Count="{Binding SpecialOffers.Count}"
-                        Current="{Binding Source={Reference carousel},
-                                          Path=Position}"
-                        DotsColor="{AppThemeBinding Light={StaticResource Greyscale400},
-                                                    Dark={StaticResource DarkDark2}}"
-                        HorizontalOptions="Center"
-                        IndicatorColor="{AppThemeBinding Light={StaticResource Primary500},
-                                                         Dark={StaticResource Greyscale400}}"
-                        Size="5" />
+                        </CarouselView>
 
-                </Grid>
+                        <controls:CustomStepper
+                            Grid.Row="1"
+                            Count="{Binding SpecialOffers.Count}"
+                            Current="{Binding Source={Reference carousel},
+                                              Path=Position}"
+                            DotsColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                        Dark={StaticResource DarkDark2}}"
+                            HorizontalOptions="Center"
+                            IndicatorColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                             Dark={StaticResource Greyscale400}}"
+                            Size="5" />
 
-                <ContentView
-                    Padding="16,0">
+                    </Grid>
 
-                    <CollectionView
-                        ItemsSource="{Binding Categories}"
-                        VerticalScrollBarVisibility="Never">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout
-                                HorizontalItemSpacing="24"
-                                Orientation="Vertical"
-                                Span="4"
-                                VerticalItemSpacing="24" />
-                        </CollectionView.ItemsLayout>
+                    <FlexLayout
+                        Margin="16,24,16,0"
+                        AlignItems="Center"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        Wrap="Wrap">
 
-                        <CollectionView.ItemTemplate>
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate
                                 x:DataType="models:HomeCategoryModel">
                                 <Grid
                                     ColumnDefinitions="8,64,8"
                                     ColumnSpacing="0"
-                                    RowDefinitions="64,auto"
+                                    RowDefinitions="64,auto,8"
                                     RowSpacing="12">
 
                                     <BoxView
@@ -229,94 +267,121 @@
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Source={Reference page},
-                                                              Path=BindingContext.SelectCategoryCommand}"
+                                                              Path=BindingContext.SelectCategoryFilterCommand}"
                                             CommandParameter="{Binding}" />
                                     </Grid.GestureRecognizers>
 
                                 </Grid>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+
+                    <Grid
+                        Padding="16,0"
+                        ColumnDefinitions="*, auto">
+
+                        <Label
+                            Grid.Column="0"
+                            HorizontalOptions="StartAndExpand"
+                            Style="{StaticResource H5Bold}"
+                            Text="Most popular" />
+
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource BodyLargeBold}"
+                            Text="See all"
+                            VerticalTextAlignment="Center" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding SeeAllSpecialOffersCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <controls:ChipCarouselView
+                        Padding="0,24,0,0"
+                        ItemSelectedCommand="{Binding SelectCategoryFilterCommand}"
+                        ItemsSource="{Binding CategoryFilters}">
+                        <controls:ChipCarouselView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="models:CategoryFilterItemModel">
+                                <Label
+                                    Style="{StaticResource BodyLargeSemiBold}"
+                                    Text="{Binding Name}"
+                                    TextColor="{StaticResource OthersWhite}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Triggers>
+
+                                        <DataTrigger
+                                            Binding="{Binding IsSelected}"
+                                            TargetType="Label"
+                                            Value="False">
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+
+                                </Label>
+                            </DataTemplate>
+
+                        </controls:ChipCarouselView.ItemTemplate>
+                    </controls:ChipCarouselView>
+
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <CollectionView.Footer>
+                <ContentView
+                    Padding="0,0,0,18">
+                    <ActivityIndicator
+                        HeightRequest="30"
+                        IsRunning="True"
+                        WidthRequest="30" />
                 </ContentView>
+            </CollectionView.Footer>
 
-                <Grid
-                    Padding="16,0"
-                    ColumnDefinitions="*, auto">
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:HomeProductModel">
+                    <controls:ProductsCardView
+                        Name="{Binding Name}"
+                        Padding="0,0,0,16"
+                        Command="{Binding Source={Reference page},
+                                          Path=BindingContext.SelectProductCommand}"
+                        CommandParameter="{Binding}"
+                        FavouriteCommand="{Binding Source={Reference page},
+                                                   Path=BindingContext.SelectFavoriteProductCommand}"
+                        ImageSource="{Binding ImageSource}"
+                        Price="{Binding Price}"
+                        Rating="{Binding Rating}"
+                        SoldCount="{Binding SoldCount}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-                    <Label
-                        Grid.Column="0"
-                        HorizontalOptions="StartAndExpand"
-                        Style="{StaticResource H5Bold}"
-                        Text="Most popular" />
+        <Border
+            x:Name="scrollButton"
+            Grid.Row="2"
+            Margin="16"
+            Padding="10"
+            Background="{AppThemeBinding Light={StaticResource Primary500},
+                                         Dark={StaticResource OthersWhite}}"
+            HeightRequest="50"
+            HorizontalOptions="End"
+            Opacity="0.0"
+            StrokeShape="RoundRectangle 25"
+            VerticalOptions="End"
+            WidthRequest="50">
 
-                    <Label
-                        Grid.Column="1"
-                        Style="{StaticResource BodyLargeBold}"
-                        Text="See all"
-                        VerticalTextAlignment="Center" />
+            <Image
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                                                 Dark={StaticResource Primary500}}"
+                Source="arrow_up_3_bold" />
 
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding SeeAllSpecialOffersCommand}" />
-                    </Grid.GestureRecognizers>
-                </Grid>
-
-                <controls:ChipCarouselView
-                    ItemSelectedCommand="{Binding SelectCategoryFilterCommand}"
-                    ItemsSource="{Binding CategoryFilters}">
-                    <controls:ChipCarouselView.ItemTemplate>
-                        <DataTemplate
-                            x:DataType="models:CategoryFilterItemModel">
-                            <Label
-                                Style="{StaticResource BodyLargeSemiBold}"
-                                Text="{Binding Name}"
-                                TextColor="{StaticResource OthersWhite}"
-                                VerticalTextAlignment="Center">
-                                <Label.Triggers>
-
-                                    <DataTrigger
-                                        Binding="{Binding IsSelected}"
-                                        TargetType="Label"
-                                        Value="False">
-                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-
-                            </Label>
-                        </DataTemplate>
-
-                    </controls:ChipCarouselView.ItemTemplate>
-                </controls:ChipCarouselView>
-
-                <FlexLayout
-                    AlignItems="Center"
-                    BindableLayout.ItemsSource="{Binding Products}"
-                    Direction="Row"
-                    JustifyContent="SpaceBetween"
-                    Wrap="Wrap">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate
-                            x:DataType="models:HomeProductModel">
-                            <controls:ProductsCardView
-                                Name="{Binding Name}"
-                                Padding="0,0,0,16"
-                                Command="{Binding Source={Reference page},
-                                                  Path=BindingContext.SelectProductCommand}"
-                                CommandParameter="{Binding}"
-                                FavouriteCommand="{Binding Source={Reference page},
-                                                           Path=BindingContext.SelectFavoriteProductCommand}"
-                                ImageSource="{Binding ImageSource}"
-                                Price="{Binding Price}"
-                                Rating="{Binding Rating}"
-                                SoldCount="{Binding SoldCount}" />
-                        </DataTemplate>
-
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-
-            </VerticalStackLayout>
-
-        </ScrollView>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="ScrollUpButtonTapped" />
+            </Border.GestureRecognizers>
+        </Border>
     </Grid>
 
 </abstract:BaseContentPage>

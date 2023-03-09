@@ -30,7 +30,7 @@
             Title="Bag"
             Icon="bag_light"
             attached:SelectedIconProperty.Source="bag_selected"
-            ContentTemplate="{DataTemplate cart:CartPage}"
+            ContentTemplate="{DataTemplate home:HomePage}"
             Route="Cart" />
         
         <ShellContent

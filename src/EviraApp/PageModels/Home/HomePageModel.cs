@@ -9,6 +9,16 @@ public partial class HomePageModel : BasePageModel
 {
     #region Private Members
 
+    private readonly Random _random = new();
+    private static readonly string[] _names =
+    {
+         "Snake Leather Bag",
+         "Suga Leather Shoes",
+         "Leather Casual Suit",
+          "Black Leather Bag",
+          "Airtight Microphone",
+    };
+
     #endregion
 
     #region Public Properties
@@ -24,81 +34,38 @@ public partial class HomePageModel : BasePageModel
     #endregion
 
     #region Constructor
+    private HomeProductModel GenerateProduct()
+    {
+        return new()
+        {
+            Name = "Snake Leather Bag",
+            Rating = _random.NextDouble() * 5.0,
+            SoldCount = _random.Next(0, 10_000_000),
+            Price = _random.Next(0, 10000),
+            ImageSource = "banner" + _random.Next(1, 5).ToString()
+        };
+    }
+    private IEnumerable<HomeProductModel> GenerateProducts(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            yield return new()
+            {
+                Name = "Snake Leather Bag",
+                Rating = _random.NextDouble() * 5.0,
+                SoldCount = _random.Next(0, 10_000_000),
+                Price = _random.Next(0, 10000),
+                ImageSource = "banner" + _random.Next(1, 5).ToString()
+            };
+        }
+    }
 
     /// <summary>
     /// Default constructor for HomePageModel
     /// </summary>
     public HomePageModel()
     {
-        var random = new Random();
-        Products = new ObservableCollection<HomeProductModel>(new List<HomeProductModel>
-        {
-            new()
-            {
-                Name = "Snake Leather Bag",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Suga Leather Shoes",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Leather Casual Suit",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Black Leather Bag",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Airtight Microphone",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Black Nike Shoes",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Snake Leather Bag",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-            new()
-            {
-                Name = "Snake Leather Bag",
-                Rating = random.NextDouble()*5.0,
-                SoldCount = random.Next(0, 10_000_000),
-                Price = random.Next(0, 10000),
-                ImageSource = "banner" + random.Next(1, 5).ToString()
-            },
-
-        });
+        Products = new ObservableCollection<HomeProductModel>(GenerateProducts(20));
 
         Categories = new List<HomeCategoryModel>
         {
@@ -253,7 +220,12 @@ public partial class HomePageModel : BasePageModel
             selected.IsSelected = false;
         }
         item.IsSelected = true;
-
+        Products.Clear();
+        await Task.Delay(2222);
+        foreach (var product in GenerateProducts(20))
+        {
+            Products.Add(product);
+        }
     }
 
     [RelayCommand]
@@ -266,6 +238,28 @@ public partial class HomePageModel : BasePageModel
     private async Task SelectFavoriteProductAsync(HomeProductModel item)
     {
         await AlertHelper.ShowInfoAsync("SelectFavoriteProductAsync: " + item.Name);
+    }
+
+    [RelayCommand]
+    private async Task NotificationsTappedAsync()
+    {
+        await AlertHelper.ShowInfoAsync("NotificationsTappedAsync");
+    }
+
+    [RelayCommand]
+    private async Task SearchTappedAsync()
+    {
+        await AlertHelper.ShowInfoAsync("SearchTappedAsync");
+    }
+
+    [RelayCommand]
+    private async Task InfiniteScrollReachedAsync()
+    {
+        await Task.Delay(2222);
+        foreach (var item in GenerateProducts(20))
+        {
+            Products.Add(item);
+        }
     }
 
     #endregion

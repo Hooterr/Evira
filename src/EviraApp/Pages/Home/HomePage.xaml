@@ -61,14 +61,18 @@
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="2"
-                Source="notification_light_outline"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="notification_iconly_light_outline"
                 VerticalOptions="Center" />
 
             <Image
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="3"
-                Source="heart_iconely_light_outline"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="heart_iconly_light_outline"
                 VerticalOptions="Center" />
 
         </Grid>
@@ -77,7 +81,8 @@
             x:Name="searchView"
             Grid.Row="1"
             Padding="16"
-            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                              Dark={StaticResource PageBackgroundDark}}"
             ZIndex="2">
 
             <Border
@@ -127,15 +132,16 @@
             </Border>
 
         </ContentView>
-        
+
         <CollectionView
             x:Name="mainCollection"
             Grid.Row="0"
             Grid.RowSpan="3"
             ItemsSource="{Binding Products}"
             RemainingItemsThreshold="2"
+            ItemsUpdatingScrollMode="KeepScrollOffset"
             RemainingItemsThresholdReachedCommand="{Binding InfiniteScrollReachedCommand}"
-            Scrolled="MainCollection_Scrolled">
+            Scrolled="MainCollection_Scrolled" >
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout

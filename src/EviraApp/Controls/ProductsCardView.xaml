@@ -15,7 +15,8 @@
         <Border
             Grid.Row="0"
             Padding="18"
-            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver}, Dark={StaticResource DarkDark3 }}"
+            BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundSilver},
+                                              Dark={StaticResource DarkDark3}}"
             StrokeShape="RoundRectangle 24">
 
             <Image
@@ -43,10 +44,10 @@
 
             <Border.GestureRecognizers>
                 <TapGestureRecognizer
-                   Command="{Binding Source={Reference control},
-                                  Path=FavouriteCommand}"
-                CommandParameter="{Binding Source={Reference control},
-                                           Path=CommandParameter}"/>
+                    Command="{Binding Source={Reference control},
+                                      Path=FavouriteCommand}"
+                    CommandParameter="{Binding Source={Reference control},
+                                               Path=CommandParameter}" />
             </Border.GestureRecognizers>
 
         </Border>
@@ -66,15 +67,16 @@
             <Grid>
 
                 <Image
-                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale500},Dark={StaticResource Greyscale700}}"
+                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale500},
+                                                                                     Dark={StaticResource Greyscale700}}"
                     Source="star_bold"
                     WidthRequest="24" />
 
                 <Image
                     x:Name="ratingImage"
                     attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Dark={StaticResource Greyscale300}}"
-                    WidthRequest="24"
-                    Source="star_bold"/>
+                    Source="star_bold"
+                    WidthRequest="24" />
 
             </Grid>
 
@@ -83,18 +85,21 @@
                 Text="{Binding Source={Reference control},
                                Path=Rating,
                                StringFormat='{0:N1}'}"
-                TextColor="{AppThemeBinding Light={StaticResource Greyscale700}, Dark={StaticResource Greyscale300}}"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale700},
+                                            Dark={StaticResource Greyscale300}}"
                 VerticalTextAlignment="Center" />
 
             <Label
                 Style="{StaticResource BodyMediumMedium}"
                 Text="|"
-                TextColor="{AppThemeBinding Light={StaticResource Greyscale700}, Dark={StaticResource Greyscale300}}"
+                TextColor="{AppThemeBinding Light={StaticResource Greyscale700},
+                                            Dark={StaticResource Greyscale300}}"
                 VerticalTextAlignment="Center" />
 
             <Border
                 Padding="12,0"
-                BackgroundColor="{AppThemeBinding Light={StaticResource TransparentSilver}, Dark={StaticResource DarkDark3}}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource TransparentSilver},
+                                                  Dark={StaticResource DarkDark3}}"
                 StrokeShape="RoundRectangle 6"
                 StrokeThickness="0">
 
@@ -103,7 +108,8 @@
                     Text="{Binding Source={Reference control},
                                    Path=SoldCount,
                                    StringFormat='{}{0:N0} sold'}"
-                    TextColor="{AppThemeBinding Light={StaticResource DarkDark3}, Dark={StaticResource OthersWhite}}"
+                    TextColor="{AppThemeBinding Light={StaticResource DarkDark3},
+                                                Dark={StaticResource OthersWhite}}"
                     VerticalTextAlignment="Center" />
 
             </Border>

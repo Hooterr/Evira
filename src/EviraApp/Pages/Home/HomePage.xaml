@@ -15,9 +15,17 @@
     x:TypeArguments="home:HomePageModel"
     Shell.NavBarIsVisible="False">
 
+    <!--
+        IMPORTANT!
+        
+        DO NOT use 'auto' as the row height for any of the rows.
+        
+        If you do that, collection view will think it's got infinite space
+        and try to render all the items without any virtualization.
+    -->
     <Grid
         x:Name="mainGrid"
-        RowDefinitions="auto, 89, *"
+        RowDefinitions="84, 89, *"
         RowSpacing="0">
 
         <Grid
@@ -139,14 +147,15 @@
             Grid.RowSpan="3"
             ItemsSource="{Binding Products}"
             RemainingItemsThreshold="2"
-            ItemsUpdatingScrollMode="KeepScrollOffset"
             RemainingItemsThresholdReachedCommand="{Binding InfiniteScrollReachedCommand}"
-            Scrolled="MainCollection_Scrolled" >
+            Scrolled="MainCollection_Scrolled">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
+                    HorizontalItemSpacing="16"
                     Orientation="Vertical"
-                    Span="2" />
+                    Span="2"
+                    VerticalItemSpacing="16" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
@@ -350,7 +359,6 @@
                     x:DataType="models:HomeProductModel">
                     <controls:ProductsCardView
                         Name="{Binding Name}"
-                        Padding="0,0,0,16"
                         Command="{Binding Source={Reference page},
                                           Path=BindingContext.SelectProductCommand}"
                         CommandParameter="{Binding}"
@@ -388,6 +396,7 @@
                     Tapped="ScrollUpButtonTapped" />
             </Border.GestureRecognizers>
         </Border>
+        
     </Grid>
 
 </abstract:BaseContentPage>

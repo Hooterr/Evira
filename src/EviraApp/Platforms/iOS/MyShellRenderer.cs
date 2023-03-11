@@ -74,6 +74,8 @@ public class MyShellTabBarAppearanceTracker : SafeShellTabBarAppearanceTracker
     public override void SetAppearance(UITabBarController controller, ShellAppearance appearance)
     {
         controller.TabBar.Translucent = false;
+        controller.TabBar.ShadowImage = new UIImage();
+        controller.TabBar.ClipsToBounds = true;
         base.SetAppearance(controller, appearance);
     }
 }

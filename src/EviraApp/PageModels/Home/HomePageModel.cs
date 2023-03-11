@@ -1,6 +1,9 @@
 using CommunityToolkit.Mvvm.Input;
 using Evira.App.Models;
 using Evira.App.PageModels.Abstract;
+using Evira.App.Pages.Home;
+using Evira.App.Pages.Login;
+using Evira.App.Pages.Products;
 using System.Collections.ObjectModel;
 
 namespace Evira.App.PageModels.Home;
@@ -189,22 +192,33 @@ public partial class HomePageModel : BasePageModel
     #region Private Methods
 
     [RelayCommand]
+    private async Task NotificationsTappedAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(NotificationsPage));
+    }
+
+    [RelayCommand]
+    private async Task WishlistTapAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(WhishlistPage));
+    }
+
+    [RelayCommand]
     private async Task SeeAllSpecialOffersAsync()
     {
-        await AlertHelper.ShowInfoAsync("SeeAllSpecialOffersAsync");
+        await Shell.Current.GoToAsync(nameof(SpecialOffersPage));
     }
 
     [RelayCommand]
     private async Task SelectSpecialOfferAsync(HomeSpecialOfferModel item)
     {
         await AlertHelper.ShowInfoAsync("SelectSpecialOfferAsync: " + item.Title);
-
     }
 
     [RelayCommand]
     private async Task SelectCategoryAsync(HomeCategoryModel item)
     {
-        await AlertHelper.ShowInfoAsync("SelectSpecialOfferAsync: " + item.Name);
+        await AlertHelper.ShowInfoAsync("SelectCategoryAsync: " + item.Name);
     }
 
     [RelayCommand]
@@ -227,7 +241,7 @@ public partial class HomePageModel : BasePageModel
     [RelayCommand]
     private async Task SelectProductAsync(HomeProductModel item)
     {
-        await AlertHelper.ShowInfoAsync("SelectProductAsync: " + item.Name);
+        await Shell.Current.GoToAsync(nameof(ProductsDetailsPage));
     }
 
     [RelayCommand]
@@ -237,15 +251,9 @@ public partial class HomePageModel : BasePageModel
     }
 
     [RelayCommand]
-    private async Task NotificationsTappedAsync()
-    {
-        await AlertHelper.ShowInfoAsync("NotificationsTappedAsync");
-    }
-
-    [RelayCommand]
     private async Task SearchTappedAsync()
     {
-        await AlertHelper.ShowInfoAsync("SearchTappedAsync");
+        await Shell.Current.GoToAsync(nameof(SearchPage));
     }
 
     [RelayCommand]
@@ -257,6 +265,7 @@ public partial class HomePageModel : BasePageModel
             Products.Add(item);
         }
     }
+
 
     #endregion
 }

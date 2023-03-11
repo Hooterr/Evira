@@ -27,120 +27,7 @@
         x:Name="mainGrid"
         RowDefinitions="84, 89, *"
         RowSpacing="0">
-
-        <Grid
-            x:Name="headerView"
-            Grid.Row="0"
-            Padding="16,32,16,0"
-            ColumnDefinitions="52, *, 28, 28"
-            ColumnSpacing="16"
-            RowDefinitions="26, 26"
-            RowSpacing="0">
-
-            <Image
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="0"
-                Source="https://picsum.photos/56">
-                <Image.Clip>
-                    <EllipseGeometry
-                        Center="26,26"
-                        RadiusX="26"
-                        RadiusY="26" />
-                </Image.Clip>
-            </Image>
-
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Style="{StaticResource BodyLargeMedium}"
-                Text="Good Morning 👋"
-                TextColor="{StaticResource Greyscale600}"
-                VerticalTextAlignment="Start" />
-
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Style="{StaticResource H5Bold}"
-                Text="Max Verstappen"
-                VerticalTextAlignment="End" />
-
-            <Image
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="2"
-                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
-                                                                                 Dark={StaticResource OthersWhite}}"
-                Source="notification_iconly_light_outline"
-                VerticalOptions="Center" />
-
-            <Image
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="3"
-                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
-                                                                                 Dark={StaticResource OthersWhite}}"
-                Source="heart_iconly_light_outline"
-                VerticalOptions="Center" />
-
-        </Grid>
-
-        <ContentView
-            x:Name="searchView"
-            Grid.Row="1"
-            Padding="16"
-            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
-                                              Dark={StaticResource PageBackgroundDark}}"
-            ZIndex="2">
-
-            <Border
-                BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale100},
-                                                  Dark={StaticResource DarkDark2}}"
-                StrokeShape="RoundRectangle 12">
-
-                <Grid
-                    Padding="18,0"
-                    ColumnDefinitions="auto,*,auto"
-                    ColumnSpacing="12"
-                    VerticalOptions="Center">
-
-                    <Image
-                        Grid.Column="0"
-                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale400},
-                                                                                         Dark={StaticResource Greyscale600}}"
-                        Source="search_iconly_light_outline" />
-
-                    <Label
-                        Grid.Column="1"
-                        Style="{StaticResource BodyMediumRegular}"
-                        Text="Search"
-                        TextColor="{AppThemeBinding Light={StaticResource Greyscale400},
-                                                    Dark={StaticResource Greyscale600}}"
-                        VerticalTextAlignment="Center" />
-
-                    <Image
-                        Grid.Column="2"
-                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Primary500},
-                                                                                         Dark={StaticResource OthersWhite}}"
-                        Source="filter_iconly_light_outline">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding NotificationsTappedCommand}" />
-                        </Image.GestureRecognizers>
-                    </Image>
-
-                </Grid>
-
-
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Command="{Binding SearchTappedCommand}" />
-                </Border.GestureRecognizers>
-
-            </Border>
-
-        </ContentView>
-
+        
         <CollectionView
             x:Name="mainCollection"
             Grid.Row="0"
@@ -164,7 +51,8 @@
                     Spacing="0">
 
                     <ContentView
-                        x:Name="contentSpacer" />
+                        x:Name="contentSpacer"
+                        BackgroundColor="Transparent" />
 
                     <Grid
                         Padding="16,0"
@@ -282,7 +170,7 @@
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Source={Reference page},
-                                                              Path=BindingContext.SelectCategoryFilterCommand}"
+                                                              Path=BindingContext.SelectCategoryCommand}"
                                             CommandParameter="{Binding}" />
                                     </Grid.GestureRecognizers>
 
@@ -371,6 +259,128 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
+        <Grid
+            x:Name="headerView"
+            Grid.Row="0"
+            Padding="16,32,16,0"
+            ColumnDefinitions="52, *, 28, 28"
+            ColumnSpacing="16"
+            RowDefinitions="26, 26"
+            RowSpacing="0">
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Source="https://picsum.photos/56">
+                <Image.Clip>
+                    <EllipseGeometry
+                        Center="26,26"
+                        RadiusX="26"
+                        RadiusY="26" />
+                </Image.Clip>
+            </Image>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BodyLargeMedium}"
+                Text="Good Morning 👋"
+                TextColor="{StaticResource Greyscale600}"
+                VerticalTextAlignment="Start" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource H5Bold}"
+                Text="Max Verstappen"
+                VerticalTextAlignment="End" />
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="notification_iconly_light_outline"
+                VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NotificationsTappedCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="3"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="heart_iconly_light_outline"
+                VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding WishlistTapCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+        </Grid>
+
+        <ContentView
+            x:Name="searchView"
+            Grid.Row="1"
+            Padding="16"
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                              Dark={StaticResource PageBackgroundDark}}">
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale100},
+                                                  Dark={StaticResource DarkDark2}}"
+                StrokeShape="RoundRectangle 12">
+
+                <Grid
+                    Padding="18,0"
+                    ColumnDefinitions="auto,*,auto"
+                    ColumnSpacing="12"
+                    VerticalOptions="Center">
+
+                    <Image
+                        Grid.Column="0"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                                                         Dark={StaticResource Greyscale600}}"
+                        Source="search_iconly_light_outline" />
+
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource BodyMediumRegular}"
+                        Text="Search"
+                        TextColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                    Dark={StaticResource Greyscale600}}"
+                        VerticalTextAlignment="Center" />
+
+                    <Image
+                        Grid.Column="2"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                                                         Dark={StaticResource OthersWhite}}"
+                        Source="filter_iconly_light_outline">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding NotificationsTappedCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </Grid>
+
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SearchTappedCommand}" />
+                </Border.GestureRecognizers>
+
+            </Border>
+
+        </ContentView>
 
         <Border
             x:Name="scrollButton"
@@ -396,7 +406,7 @@
                     Tapped="ScrollUpButtonTapped" />
             </Border.GestureRecognizers>
         </Border>
-        
+
     </Grid>
 
 </abstract:BaseContentPage>

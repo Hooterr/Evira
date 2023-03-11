@@ -4,10 +4,150 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     xmlns:home="clr-namespace:Evira.App.PageModels.Home"
+    xmlns:models="clr-namespace:Evira.App.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:toolkitModels="clr-namespace:CommunityToolkit.Mvvm.Collections;assembly=CommunityToolkit.Mvvm"
+    x:Name="page"
     Title="{Binding Title}"
     x:DataType="home:NotificationsPageModel"
-    x:TypeArguments="home:NotificationsPageModel">
-    
+    x:TypeArguments="home:NotificationsPageModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale50},
+                                      Dark={StaticResource PageBackgroundDark}}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        ColumnDefinitions="24, 28, 16, *, 16, 28, 24"
+        ColumnSpacing="0"
+        RowDefinitions="24, 48, 24, *"
+        RowSpacing="0">
+
+        <Image
+            Grid.Row="1"
+            Grid.Column="1"
+            attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                             Dark={StaticResource OthersWhite}}"
+            Source="arrow_left_iconly_light_outline">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding GoBackCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Image
+            Grid.Row="1"
+            Grid.Column="5"
+            attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                             Dark={StaticResource OthersWhite}}"
+            Source="more_circle_iconly_light_outline">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding GoBackCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{StaticResource H4Bold}"
+            Text="{Binding Title}"
+            VerticalTextAlignment="Center" />
+
+        <CollectionView
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="5"
+            IsGrouped="True"
+            ItemsSource="{Binding Notifications}">
+
+            <CollectionView.Footer>
+                <ContentView
+                    HeightRequest="0" />
+            </CollectionView.Footer>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    ItemSpacing="24"
+                    Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate
+                    x:DataType="{x:Null}">
+                    <Label
+                        Style="{StaticResource H6Bold}"
+                        Text="{Binding Key}" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:NotificationModel">
+                    <Border
+                        Padding="16"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                          Dark={StaticResource DarkDark2}}"
+                        HeightRequest="100"
+                        StrokeShape="RoundRectangle 16">
+
+                        <Grid
+                            ColumnDefinitions="68,*"
+                            ColumnSpacing="16"
+                            RowDefinitions="*,*"
+                            RowSpacing="8">
+
+                            <Border
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                                  Dark={StaticResource OthersWhite}}"
+                                StrokeShape="RoundRectangle 34">
+
+                                <Image
+                                    attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                                                                     Dark={StaticResource DarkDark2}}"
+                                    HeightRequest="28"
+                                    Source="{Binding Icon}"
+                                    WidthRequest="28" />
+
+                            </Border>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1"
+                                Style="{StaticResource H6Bold}"
+                                Text="{Binding Title}"
+                                VerticalTextAlignment="End" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1"
+                                Style="{StaticResource BodyMediumMedium}"
+                                Text="{Binding SubTitle}"
+                                TextColor="{AppThemeBinding Light={StaticResource Greyscale700},
+                                                            Dark={StaticResource Greyscale300}}"
+                                VerticalTextAlignment="Start" />
+
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={Reference page},
+                                                  Path=BindingContext.NotificationTapCommand}"
+                                CommandParameter="{Binding}" />
+                        </Border.GestureRecognizers>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
 </abstract:BaseContentPage>

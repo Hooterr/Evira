@@ -85,11 +85,14 @@ public static class MauiProgram
         builder.Services.AddTransient<HomePageModel>();
         builder.Services.AddTransient<WhishlistPageModel>();
         builder.Services.AddTransient<SpecialOffersPageModel>();
-        
+        builder.Services.AddTransient<NotificationsPageModel>();
+
         builder.Services.AddTransient<ProductsDetailsPageModel>();
         builder.Services.AddTransient<SearchPageModel>();
         builder.Services.AddTransient<FilterPopupPageModel>();
-        
+
+        builder.Services.AddTransient<SearchPageModel>();
+
         builder.Services.AddTransient<CartPageModel>();
 
         builder.Services.AddTransient<OrdersPageModel>();
@@ -117,11 +120,14 @@ public static class MauiProgram
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<WhishlistPage>();
         builder.Services.AddTransient<SpecialOffersPage>();
+        builder.Services.AddTransient<NotificationsPage>();
         
         builder.Services.AddTransient<ProductsDetailsPage>();
         builder.Services.AddTransient<SearchPage>();
         builder.Services.AddTransient<FilterPopupPage>();
-        
+
+        builder.Services.AddTransient<SearchPage>();
+
         builder.Services.AddTransient<CartPage>();
 
         builder.Services.AddTransient<OrdersPage>();

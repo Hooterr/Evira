@@ -4,10 +4,105 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+    xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+    xmlns:controls="clr-namespace:Evira.App.Controls"
+    xmlns:models="clr-namespace:Evira.App.Models"
     xmlns:products="clr-namespace:Evira.App.PageModels.Products"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    Title="{Binding Title}"
     x:DataType="products:SearchPageModel"
-    x:TypeArguments="products:SearchPageModel">
-    
+    x:Name="page"
+    x:TypeArguments="products:SearchPageModel"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        Padding="24,0"
+        RowDefinitions="24, 56, 56, 1, *"
+        RowSpacing="0">
+
+        <controls:EntryControl
+            Grid.Row="1"
+            Image="search_iconly_light_outline"
+            Placeholder="Search..."
+            ReturnCommand="{Binding SearchCommand}"
+            ReturnType="Search"
+            RightImage="filter_bold"
+            RightImageCommand="{Binding FilterTappedCommand}"
+            Text="{Binding SearchText}" />
+
+        <Label
+            Grid.Row="2"
+            Style="{StaticResource H5Bold}"
+            Text="Recent"
+            VerticalTextAlignment="Center" />
+
+        <Label
+            Grid.Row="2"
+            HorizontalOptions="End"
+            Style="{StaticResource BodyLargeBold}"
+            Text="Clear all"
+            VerticalOptions="Center" />
+
+        <BoxView
+            Grid.Row="3"
+            BackgroundColor="{StaticResource Greyscale200}" />
+
+
+        <CollectionView
+            Grid.Row="4"
+            ItemsSource="{Binding RecentSearches}">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout
+                    Padding="0,50,0,0"
+                    Spacing="8">
+
+                    <Image HeightRequest="244" Source="https://picsum.photos/244"/>
+
+                    <Label Text="Not Found"
+                           Padding="0,24,0,0"
+                           HorizontalTextAlignment="Center"
+                           Style="{StaticResource H4Bold}"/>
+                    <Label Text="Sorry, the keyword you entered cannot be found, please check again or search with another keyword."
+                           HorizontalTextAlignment="Center"
+                           Style="{StaticResource BodyXLargeRegular}"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:RecentSearchItemModel">
+                    <Grid
+                        ColumnDefinitions="*, 28"
+                        ColumnSpacing="16"
+                        HeightRequest="48"
+                        VerticalOptions="Start">
+
+                        <Label
+                            MaxLines="1"
+                            LineBreakMode="TailTruncation"
+                            Grid.Column="0"
+                            Style="{StaticResource BodyXLargeMedium}"
+                            Text="{Binding Text}"
+                            TextColor="{AppThemeBinding Light={StaticResource Greyscale600}}"
+                            VerticalTextAlignment="Center" />
+
+                        <Image
+                            Grid.Column="1"
+                            attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale600}}"
+                            Source="close_square_iconly_light_outline">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={Reference page}, Path=BindingContext.RemoveRecentSearchCommand}"
+                                    CommandParameter="{Binding}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
 </abstract:BaseContentPage>

@@ -31,9 +31,12 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(SetupBiometricsPage), typeof(SetupBiometricsPage));
 		
 		Routing.RegisterRoute(nameof(WhishlistPage), typeof(WhishlistPage));
+		Routing.RegisterRoute(nameof(NotificationsPage), typeof(NotificationsPage));
 		Routing.RegisterRoute(nameof(SpecialOffersPage), typeof(SpecialOffersPage));
 		Routing.RegisterRoute(nameof(ProductsDetailsPage), typeof(ProductsDetailsPage));
-		
+
+		Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
+	
 		InitializeComponent();
 	}
 }

@@ -6,7 +6,7 @@
              x:Name="control">
 
     <ScrollView Orientation="Horizontal"
-                Padding="14,-2"
+                Padding="{OnPlatform Android='14,-2', iOS='14,0'}"
                 HeightRequest="38"
                 HorizontalScrollBarVisibility="Never">
 

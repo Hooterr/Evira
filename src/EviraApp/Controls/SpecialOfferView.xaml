@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Evira.App.Models"
              x:Class="Evira.App.Controls.SpecialOfferView">
+    <!-- Leave the height request otherwise on iOS border will be messed up -->
     <Border
+        HeightRequest="180"
         x:Name="border"
         x:DataType="models:HomeSpecialOfferModel"
         BackgroundColor="{AppThemeBinding Light={StaticResource Primary100}, Dark={StaticResource DarkDark3}}"
         StrokeShape="RoundRectangle 32">
+
         <Grid
             Padding="32,0,16,0"
             ColumnDefinitions="1.3*,*">

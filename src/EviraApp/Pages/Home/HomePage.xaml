@@ -47,6 +47,8 @@
 
             <CollectionView.Header>
                 <VerticalStackLayout
+                    x:Name="headerLayout"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
                     Padding="0,0,0,16"
                     Spacing="0">
 
@@ -86,6 +88,7 @@
                             Grid.Row="0"
                             Grid.RowSpan="3"
                             HeightRequest="180"
+                            HorizontalScrollBarVisibility="Never"
                             ItemsSource="{Binding SpecialOffers}"
                             Loop="False">
                             <CarouselView.ItemsLayout>
@@ -99,6 +102,7 @@
                                 <DataTemplate
                                     x:DataType="models:HomeSpecialOfferModel">
                                     <controls:SpecialOfferView
+                                        Padding="16,0"
                                         Command="{Binding Source={Reference page},
                                                           Path=BindingContext.SelectSpecialOfferCommand}"
                                         Model="{Binding}" />
@@ -230,6 +234,7 @@
                     </controls:ChipCarouselView>
 
                 </VerticalStackLayout>
+
             </CollectionView.Header>
 
             <CollectionView.Footer>
@@ -261,6 +266,7 @@
         </CollectionView>
         
         <Grid
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
             x:Name="headerView"
             Grid.Row="0"
             Padding="16,32,16,0"
@@ -328,6 +334,7 @@
         </Grid>
 
         <ContentView
+            SizeChanged="MainGrid_OnSizeChanged"
             x:Name="searchView"
             Grid.Row="1"
             Padding="16"

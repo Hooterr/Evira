@@ -102,7 +102,7 @@
                                 <DataTemplate
                                     x:DataType="models:HomeSpecialOfferModel">
                                     <controls:SpecialOfferView
-                                        Padding="16,0"
+                                        Padding="{OnPlatform iOS='16,0'}"
                                         Command="{Binding Source={Reference page},
                                                           Path=BindingContext.SelectSpecialOfferCommand}"
                                         Model="{Binding}" />

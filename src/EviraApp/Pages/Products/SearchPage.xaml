@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <abstract:BaseContentPage
     x:Class="Evira.App.Pages.Products.SearchPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -12,6 +12,7 @@
     x:DataType="products:SearchPageModel"
     x:Name="page"
     x:TypeArguments="products:SearchPageModel"
+    ControlTemplate="{StaticResource NavControlTemplate}"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
 

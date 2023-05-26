@@ -25,6 +25,8 @@ using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using Evira.App.Platforms;
+using Sharpnado.Tabs;
+
 namespace Evira.App;
 
 public static class MauiProgram
@@ -36,6 +38,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .ConfigureMopups()
+            .UseSharpnadoTabs(true, true)
             .UseMauiCommunityToolkitMarkup()
             .ConfigureMauiHandlers(handlers =>
             {

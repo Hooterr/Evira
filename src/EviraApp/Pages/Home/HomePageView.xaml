@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstract="clr-namespace:Evira.App.Pages.Abstract"
+        xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
+            xmlns:controls="clr-namespace:Evira.App.Controls"
+            xmlns:home="clr-namespace:Evira.App.PageModels.Home"
+            xmlns:models="clr-namespace:Evira.App.Models"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:DataType="home:HomePageModel"
+             x:Class="Evira.App.Pages.Home.HomePageView">
+        <!--
+        IMPORTANT!
+        
+        DO NOT use 'auto' as the row height for any of the rows.
+        
+        If you do that, collection view will think it's got infinite space
+        and try to render all the items without any virtualization.
+    -->
+    <Grid
+        x:Name="mainGrid"
+        RowDefinitions="84, 89, *"
+        RowSpacing="0">
+        
+        <CollectionView
+            x:Name="mainCollection"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            ItemsSource="{Binding Products}"
+            RemainingItemsThreshold="2"
+            RemainingItemsThresholdReachedCommand="{Binding InfiniteScrollReachedCommand}"
+            Scrolled="MainCollection_Scrolled">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="16"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="16" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.Header>
+                <VerticalStackLayout
+                    x:Name="headerLayout"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
+                    Padding="0,0,0,16"
+                    Spacing="0">
+
+                    <ContentView
+                        x:Name="contentSpacer"
+                        BackgroundColor="Transparent" />
+
+                    <Grid
+                        Padding="16,0"
+                        ColumnDefinitions="*, auto">
+
+                        <Label
+                            Grid.Column="0"
+                            HorizontalOptions="StartAndExpand"
+                            Style="{StaticResource H5Bold}"
+                            Text="Special offers" />
+
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource BodyLargeBold}"
+                            Text="See all"
+                            VerticalTextAlignment="Center" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding SeeAllSpecialOffersCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <Grid
+                        Padding="0,24,0,0"
+                        RowDefinitions="*, auto, 8"
+                        RowSpacing="0">
+
+                        <CarouselView
+                            x:Name="carousel"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            HeightRequest="180"
+                            HorizontalScrollBarVisibility="Never"
+                            ItemsSource="{Binding SpecialOffers}"
+                            Loop="False">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout
+                                    ItemSpacing="24"
+                                    Orientation="Horizontal"
+                                    SnapPointsAlignment="Center"
+                                    SnapPointsType="MandatorySingle" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate
+                                    x:DataType="models:HomeSpecialOfferModel">
+                                    <controls:SpecialOfferView
+                                        Padding="{OnPlatform iOS='16,0'}"
+                                        Command="{Binding Source={Reference page},
+                                                          Path=BindingContext.SelectSpecialOfferCommand}"
+                                        Model="{Binding}" />
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+
+                        </CarouselView>
+
+                        <controls:CustomStepper
+                            Grid.Row="1"
+                            Count="{Binding SpecialOffers.Count}"
+                            Current="{Binding Source={Reference carousel},
+                                              Path=Position}"
+                            DotsColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                        Dark={StaticResource DarkDark2}}"
+                            HorizontalOptions="Center"
+                            IndicatorColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                             Dark={StaticResource Greyscale400}}"
+                            Size="5" />
+
+                    </Grid>
+
+                    <FlexLayout
+                        Margin="16,24,16,0"
+                        AlignItems="Center"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        Wrap="Wrap">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="models:HomeCategoryModel">
+                                <Grid
+                                    ColumnDefinitions="8,64,8"
+                                    ColumnSpacing="0"
+                                    RowDefinitions="64,auto,8"
+                                    RowSpacing="12">
+
+                                    <BoxView
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        CornerRadius="32"
+                                        Color="{AppThemeBinding Light={StaticResource Greyscale300},
+                                                                Dark={StaticResource DarkDark3}}" />
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                                         Dark={StaticResource OthersWhite}}"
+                                        HeightRequest="28"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding Icon}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="28" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalTextAlignment="Center"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1"
+                                        Style="{StaticResource BodyLargeBold}"
+                                        Text="{Binding Name}"
+                                        TextColor="{AppThemeBinding Light={StaticResource Greyscale800},
+                                                                    Dark={StaticResource Greyscale50}}" />
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={Reference page},
+                                                              Path=BindingContext.SelectCategoryCommand}"
+                                            CommandParameter="{Binding}" />
+                                    </Grid.GestureRecognizers>
+
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+
+                    <Grid
+                        Padding="16,0"
+                        ColumnDefinitions="*, auto">
+
+                        <Label
+                            Grid.Column="0"
+                            HorizontalOptions="StartAndExpand"
+                            Style="{StaticResource H5Bold}"
+                            Text="Most popular" />
+
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource BodyLargeBold}"
+                            Text="See all"
+                            VerticalTextAlignment="Center" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding SeeAllSpecialOffersCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <controls:ChipCarouselView
+                        Padding="0,24,0,0"
+                        ItemSelectedCommand="{Binding SelectCategoryFilterCommand}"
+                        ItemsSource="{Binding CategoryFilters}">
+                        <controls:ChipCarouselView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="models:CategoryFilterItemModel">
+                                <Label
+                                    Style="{StaticResource BodyLargeSemiBold}"
+                                    Text="{Binding Name}"
+                                    TextColor="{StaticResource OthersWhite}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Triggers>
+
+                                        <DataTrigger
+                                            Binding="{Binding IsSelected}"
+                                            TargetType="Label"
+                                            Value="False">
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary500}, Dark={StaticResource OthersWhite}}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+
+                                </Label>
+                            </DataTemplate>
+
+                        </controls:ChipCarouselView.ItemTemplate>
+                    </controls:ChipCarouselView>
+
+                </VerticalStackLayout>
+
+            </CollectionView.Header>
+
+            <CollectionView.Footer>
+                <ContentView
+                    Padding="0,0,0,18">
+                    <ActivityIndicator
+                        HeightRequest="30"
+                        IsRunning="True"
+                        WidthRequest="30" />
+                </ContentView>
+            </CollectionView.Footer>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:HomeProductModel">
+                    <controls:ProductsCardView
+                        Name="{Binding Name}"
+                        Command="{Binding Source={Reference page},
+                                          Path=BindingContext.SelectProductCommand}"
+                        CommandParameter="{Binding}"
+                        FavouriteCommand="{Binding Source={Reference page},
+                                                   Path=BindingContext.SelectFavoriteProductCommand}"
+                        ImageSource="{Binding ImageSource}"
+                        Price="{Binding Price}"
+                        Rating="{Binding Rating}"
+                        SoldCount="{Binding SoldCount}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Grid
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite}, Dark={StaticResource PageBackgroundDark}}"
+            x:Name="headerView"
+            Grid.Row="0"
+            Padding="16,32,16,0"
+            ColumnDefinitions="52, *, 28, 28"
+            ColumnSpacing="16"
+            RowDefinitions="26, 26"
+            RowSpacing="0">
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Source="https://picsum.photos/56">
+                <Image.Clip>
+                    <EllipseGeometry
+                        Center="26,26"
+                        RadiusX="26"
+                        RadiusY="26" />
+                </Image.Clip>
+            </Image>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BodyLargeMedium}"
+                Text="Good Morning 👋"
+                TextColor="{StaticResource Greyscale600}"
+                VerticalTextAlignment="Start" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource H5Bold}"
+                Text="Max Verstappen"
+                VerticalTextAlignment="End" />
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="notification_iconly_light_outline"
+                VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NotificationsTappedCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="3"
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale900},
+                                                                                 Dark={StaticResource OthersWhite}}"
+                Source="heart_iconly_light_outline"
+                VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding WishlistTapCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+        </Grid>
+
+        <ContentView
+            SizeChanged="MainGrid_OnSizeChanged"
+            x:Name="searchView"
+            Grid.Row="1"
+            Padding="16"
+            BackgroundColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                              Dark={StaticResource PageBackgroundDark}}">
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource Greyscale100},
+                                                  Dark={StaticResource DarkDark2}}"
+                StrokeShape="RoundRectangle 12">
+
+                <Grid
+                    Padding="18,0"
+                    ColumnDefinitions="auto,*,auto"
+                    ColumnSpacing="12"
+                    VerticalOptions="Center">
+
+                    <Image
+                        Grid.Column="0"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                                                         Dark={StaticResource Greyscale600}}"
+                        Source="search_iconly_light_outline" />
+
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource BodyMediumRegular}"
+                        Text="Search"
+                        TextColor="{AppThemeBinding Light={StaticResource Greyscale400},
+                                                    Dark={StaticResource Greyscale600}}"
+                        VerticalTextAlignment="Center" />
+
+                    <Image
+                        Grid.Column="2"
+                        attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource Primary500},
+                                                                                         Dark={StaticResource OthersWhite}}"
+                        Source="filter_iconly_light_outline">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding NotificationsTappedCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </Grid>
+
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SearchTappedCommand}" />
+                </Border.GestureRecognizers>
+
+            </Border>
+
+        </ContentView>
+
+        <Border
+            x:Name="scrollButton"
+            Grid.Row="2"
+            Margin="16"
+            Padding="10"
+            Background="{AppThemeBinding Light={StaticResource Primary500},
+                                         Dark={StaticResource OthersWhite}}"
+            HeightRequest="50"
+            HorizontalOptions="End"
+            Opacity="0.0"
+            StrokeShape="RoundRectangle 25"
+            VerticalOptions="End"
+            WidthRequest="50">
+
+            <Image
+                attachedProperties:TintedImageEffect.TintColor="{AppThemeBinding Light={StaticResource OthersWhite},
+                                                                                 Dark={StaticResource Primary500}}"
+                Source="arrow_up_3_bold" />
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="ScrollUpButtonTapped" />
+            </Border.GestureRecognizers>
+        </Border>
+
+    </Grid>
+
+</ContentView>
+

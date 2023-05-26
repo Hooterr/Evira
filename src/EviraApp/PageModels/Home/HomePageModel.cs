@@ -194,19 +194,22 @@ public partial class HomePageModel : BasePageModel
     [RelayCommand]
     private async Task NotificationsTappedAsync()
     {
-        await Shell.Current.GoToAsync(nameof(NotificationsPage));
+        await _navigationService.PushAsync<NotificationsPage>();
+        //await Shell.Current.GoToAsync(nameof(NotificationsPage));
     }
 
     [RelayCommand]
     private async Task WishlistTapAsync()
     {
-        await Shell.Current.GoToAsync(nameof(WhishlistPage));
+        await _navigationService.PushAsync<WhishlistPage>();
+        //await Shell.Current.GoToAsync(nameof(WhishlistPage));
     }
 
     [RelayCommand]
     private async Task SeeAllSpecialOffersAsync()
     {
-        await Shell.Current.GoToAsync(nameof(SpecialOffersPage));
+        await _navigationService.PushAsync<SpecialOffersPage>();
+        //await Shell.Current.GoToAsync(nameof(SpecialOffersPage));
     }
 
     [RelayCommand]
@@ -241,7 +244,8 @@ public partial class HomePageModel : BasePageModel
     [RelayCommand]
     private async Task SelectProductAsync(HomeProductModel item)
     {
-        await Shell.Current.GoToAsync(nameof(ProductsDetailsPage));
+        await _navigationService.PushAsync<ProductsDetailsPage>();
+        //await Shell.Current.GoToAsync(nameof(ProductsDetailsPage));
     }
 
     [RelayCommand]
@@ -253,7 +257,8 @@ public partial class HomePageModel : BasePageModel
     [RelayCommand]
     private async Task SearchTappedAsync()
     {
-        await Shell.Current.GoToAsync(nameof(SearchPage));
+        await _navigationService.PushAsync<SearchPage>();
+        //await Shell.Current.GoToAsync(nameof(SearchPage));
     }
 
     [RelayCommand]

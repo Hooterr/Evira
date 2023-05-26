@@ -68,7 +68,9 @@ public partial class WalkthroughPageModel : BasePageModel
         if (CurrentStep + 1 == Steps.Count)
         {
             // todo navigate
-            await Shell.Current.GoToAsync("../../");
+            await _navigationService.PopAsync();
+            await _navigationService.PopAsync();
+            //await Shell.Current.GoToAsync("../../");
         }
         else
         {

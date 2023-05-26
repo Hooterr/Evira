@@ -9,6 +9,7 @@
     xmlns:controls="clr-namespace:Evira.App.Controls"
     xmlns:attachedProperties="clr-namespace:Evira.App.AttachedProperties"
     Shell.NavBarIsVisible="False"
+    IconImageSource="profile_light"
     x:DataType="debug:ControlGalleryPageModel"
     x:TypeArguments="debug:ControlGalleryPageModel">
     

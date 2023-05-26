@@ -37,7 +37,8 @@ public partial class FillProfilePageModel : BasePageModel
     [RelayCommand]
     private async Task ContinueAsync()
     {
-        await Shell.Current.GoToAsync($"{nameof(CreatePinPage)}");
+        await _navigationService.PushAsync<CreatePinPage>();
+        //await Shell.Current.GoToAsync($"{nameof(CreatePinPage)}");
     }
     
     #endregion

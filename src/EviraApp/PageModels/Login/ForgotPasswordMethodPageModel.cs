@@ -67,7 +67,8 @@ public partial class ForgotPasswordMethodPageModel : BasePageModel
     [RelayCommand(CanExecute = nameof(IsContinueEnabled))]
     private async Task ContinueAsync()
     {
-        await Shell.Current.GoToAsync($"{nameof(ForgotPasswordEnterCodePage)}");
+        await _navigationService.PushAsync<ForgotPasswordEnterCodePage>();
+        //await Shell.Current.GoToAsync($"{nameof(ForgotPasswordEnterCodePage)}");
     }
     
     #endregion

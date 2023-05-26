@@ -10,7 +10,10 @@ namespace Evira.App
             var scene = UIKit.UIApplication.SharedApplication.ConnectedScenes.ToArray().FirstOrDefault();
             var windowScene = (UIKit.UIWindowScene)scene;
             var safeArea = windowScene.Windows.FirstOrDefault()?.SafeAreaInsets;
-
+            if (safeArea is null)
+            {
+                return Thickness.Zero;
+            }
             return new Thickness(safeArea.Value.Left, safeArea.Value.Top, safeArea.Value.Right, safeArea.Value.Bottom);
         }
     }

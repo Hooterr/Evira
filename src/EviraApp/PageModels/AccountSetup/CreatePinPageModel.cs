@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Evira.App.Pages.AccountSetup;
 using Evira.App.Helpers;
+using Evira.App.Services;
 
 namespace Evira.App.PageModels.AccountSetup;
 
@@ -45,7 +46,8 @@ public partial class CreatePinPageModel : BasePageModel
             return;
         }
 
-        await Shell.Current.GoToAsync($"{nameof(SetupBiometricsPage)}");
+        await _navigationService.PushAsync<SetupBiometricsPage>();
+        //await Shell.Current.GoToAsync($"{nameof(SetupBiometricsPage)}");
     }
     
     #endregion

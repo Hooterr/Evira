@@ -16,13 +16,15 @@ namespace Evira.App.PageModels.Debug
 		[RelayCommand]
 		public async Task OpenWelcome()
 		{
-			await Shell.Current.GoToAsync(nameof(WelcomePage));
+			await _navigationService.PushAsync<WelcomePage>();
+			//await Shell.Current.GoToAsync(nameof(WelcomePage));
 		}
 
 		[RelayCommand]
 		public async Task OpenLoginStart()
 		{
-			await Shell.Current.GoToAsync(nameof(LoginStartPage));
+			await _navigationService.PushAsync<LoginStartPage>();
+			//await Shell.Current.GoToAsync(nameof(LoginStartPage));
 		}
 
 	}

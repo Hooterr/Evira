@@ -36,7 +36,8 @@ public partial class WelcomePageModel : BasePageModel
     [RelayCommand]
     private async Task NextAsync()
     {
-        await Shell.Current.GoToAsync(nameof(WalkthroughPage));
+        await _navigationService.PushAsync<WalkthroughPage>();
+        //await Shell.Current.GoToAsync(nameof(WalkthroughPage));
     }
     
     #endregion

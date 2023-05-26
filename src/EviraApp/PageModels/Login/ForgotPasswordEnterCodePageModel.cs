@@ -68,7 +68,8 @@ public partial class ForgotPasswordEnterCodePageModel : BasePageModel
         }
 
         _timer.Stop();
-        await Shell.Current.GoToAsync($"{nameof(ForgotPasswordCreateNewPasswordPage)}");
+        await _navigationService.PushAsync<ForgotPasswordCreateNewPasswordPage>();
+        //await Shell.Current.GoToAsync($"{nameof(ForgotPasswordCreateNewPasswordPage)}");
     }
 
     [RelayCommand]

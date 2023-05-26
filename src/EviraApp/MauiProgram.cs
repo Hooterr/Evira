@@ -25,6 +25,8 @@ using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using Evira.App.Platforms;
+using Evira.App.Services;
+
 namespace Evira.App;
 
 public static class MauiProgram
@@ -67,7 +69,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
+		
+		builder.Services.AddSingleton<INavigationService, TabbedPageNavigationService>();
+		
 		builder.Services.AddTransient<ControlGalleryPageModel>();
 		builder.Services.AddTransient<WelcomePageModel>();
 		builder.Services.AddTransient<WalkthroughPageModel>();

@@ -43,13 +43,15 @@ public partial class LoginStartPageModel : BasePageModel
     [RelayCommand]
     private async Task SignInWithPasswordAsync()
     {
-        await Shell.Current.GoToAsync(nameof(SignInPage));
+        await _navigationService.PushAsync<SignInPage>();
+        //await Shell.Current.GoToAsync(nameof(SignInPage));
     }
 
     [RelayCommand]
     private async Task NavigateToSignUpAsync()
     {
-        await Shell.Current.GoToAsync(nameof(SignUpPage));
+        await _navigationService.PushAsync<SignUpPage>();
+        //await Shell.Current.GoToAsync(nameof(SignUpPage));
     }
 
     #endregion

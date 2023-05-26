@@ -48,7 +48,8 @@ public partial class SignInPageModel : BasePageModel
     [RelayCommand]
     private async Task NavigateToForgotPasswordAsync()
     {
-        await Shell.Current.GoToAsync(nameof(ForgotPasswordMethodPage));
+        await _navigationService.PushAsync<ForgotPasswordMethodPage>();
+        //await Shell.Current.GoToAsync(nameof(ForgotPasswordMethodPage));
     }
     
     [RelayCommand]
@@ -60,7 +61,8 @@ public partial class SignInPageModel : BasePageModel
     [RelayCommand]
     private async Task NavigateToSignUpAsync()
     {
-        await Shell.Current.GoToAsync($"../{nameof(SignUpPage)}");
+        await _navigationService.PushAsync<SignUpPage>();
+        //await Shell.Current.GoToAsync($"../{nameof(SignUpPage)}");
     }
     
     #endregion

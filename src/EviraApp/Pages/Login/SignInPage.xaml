@@ -13,6 +13,7 @@
     x:DataType="login:SignInPageModel"
     x:TypeArguments="login:SignInPageModel"
     ControlTemplate="{StaticResource NavControlTemplate}"
+    NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
 

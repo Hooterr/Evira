@@ -10,9 +10,11 @@
     xmlns:models="clr-namespace:Evira.App.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="page"
+    IconImageSource="home_light"
     Title="{Binding Title}"
     x:DataType="home:HomePageModel"
     x:TypeArguments="home:HomePageModel"
+    NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
 
     <!--

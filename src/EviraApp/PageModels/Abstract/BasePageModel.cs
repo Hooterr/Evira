@@ -1,6 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Evira.App.Services;
 
 namespace Evira.App.PageModels.Abstract
 {
@@ -12,8 +13,11 @@ namespace Evira.App.PageModels.Abstract
 		[ObservableProperty]
 		private bool _isBusy;
 
+		protected readonly INavigationService _navigationService;
+		
 		protected BasePageModel()
 		{
+			_navigationService = IoC.Current.GetRequiredService<INavigationService>();
 		}
 
 		protected async Task ExecuteBusyAction(Func<Task> action)
@@ -37,7 +41,8 @@ namespace Evira.App.PageModels.Abstract
 		[RelayCommand(CanExecute = nameof(CanGoBack))]
 		protected virtual async Task GoBackAsync()
 		{
-			await Shell.Current.GoToAsync("../");
+			await _navigationService.PopAsync();
+			//await Shell.Current.GoToAsync("../");
 		}
 	}
 }

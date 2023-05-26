@@ -57,7 +57,8 @@ public partial class SignUpPageModel : BasePageModel
     [RelayCommand]
     private async Task NavigateToSignInAsync()
     {
-        await Shell.Current.GoToAsync($"../{nameof(SignInPage)}");
+        await _navigationService.PushAsync<SignInPage>();
+        //await Shell.Current.GoToAsync($"../{nameof(SignInPage)}");
     }
 
     [RelayCommand]
@@ -65,7 +66,8 @@ public partial class SignUpPageModel : BasePageModel
     {
         await ExecuteBusyAction(async () =>
         {
-            await Shell.Current.GoToAsync($"{nameof(FillProfilePage)}");
+            await _navigationService.PushAsync<FillProfilePage>();
+            //await Shell.Current.GoToAsync($"{nameof(FillProfilePage)}");
             //await Task.Delay(3000);
         });
     }

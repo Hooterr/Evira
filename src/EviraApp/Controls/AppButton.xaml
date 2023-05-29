@@ -12,11 +12,12 @@
         ColumnSpacing="20"
         RowDefinitions="56">
 
-        <BoxView
+        <Border
             x:Name="BackgroundView"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            CornerRadius="16">
+            StrokeShape="RoundRectangle 16"
+            StrokeThickness="0">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroupList>
                     <VisualStateGroup
@@ -24,19 +25,19 @@
                         <VisualState
                             x:Name="Normal">
                             <VisualState.Setters>
-                                <Setter Property="Color" Value="{AppThemeBinding Dark={StaticResource Greyscale50}, Light={StaticResource Primary500}}" />
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Greyscale50}, Light={StaticResource Primary500}}" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState
                             x:Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, Dark={StaticResource AlertsStatusButtonDisabled}}" />
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource AlertsStatusButtonDisabled}, Dark={StaticResource AlertsStatusButtonDisabled}}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateGroupList>
             </VisualStateManager.VisualStateGroups>
-        </BoxView>
+        </Border>
 
         <Image
             x:Name="LeftImage"

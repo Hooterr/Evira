@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using CommunityToolkit.Maui.Markup;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace Evira.App.Controls;
 
@@ -105,14 +106,10 @@ public partial class AppButton : ContentView
 
     private void VariantPropertyChanged(ButtonVariant oldValue, ButtonVariant newValue)
     {
-        if (newValue == ButtonVariant.Rectangle)
+        BackgroundView.StrokeShape = new RoundRectangle
         {
-            BackgroundView.CornerRadius = 16;
-        }
-        else if (newValue == ButtonVariant.Round)
-        {
-            BackgroundView.CornerRadius = 29;
-        }
+            CornerRadius = newValue is ButtonVariant.Rectangle ? 16 : 29,
+        };
     }
 
     public new static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(
@@ -130,7 +127,7 @@ public partial class AppButton : ContentView
 
     private void BackgroundColorPropertyChanged(Color oldValue, Color newValue)
     {
-        BackgroundView.Color = newValue;
+        BackgroundView.BackgroundColor = newValue;
     }
 
     public static readonly BindableProperty TextColorProperty = BindableProperty.Create(

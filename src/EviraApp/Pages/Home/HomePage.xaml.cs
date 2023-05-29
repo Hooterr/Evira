@@ -6,12 +6,13 @@ namespace Evira.App.Pages.Home;
 
 public partial class HomePage : BaseContentPage<HomePageModel>
 {
-    private readonly Thickness safeArea;
+    private readonly Thickness _safeArea;
+    private bool _reachedThreshold;
 
     public HomePage(HomePageModel pageModel) : base(pageModel)
-	{
-		InitializeComponent();
-        safeArea = GetSafeAreaInsets();
+    {
+        InitializeComponent();
+        _safeArea = GetSafeAreaInsets();
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -28,26 +29,30 @@ public partial class HomePage : BaseContentPage<HomePageModel>
     
     private void ScrollUpButtonTapped(object sender, TappedEventArgs e)
     {
-        mainCollection.ScrollTo(0, animate: true);
+        mainCollection.ScrollTo(0, animate: false);
+        searchView.TranslateTo(0, 0, 127);
+        scrollButton.FadeTo(0.0, 127);
     }
 
-    private bool reachedThreshold;
     private void MainCollection_Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        //headerView.TranslationY = -Math.Min(e.VerticalOffset, headerView.Y + headerView.Height - safeArea.Top);
-        searchView.TranslationY = -Math.Min(e.VerticalOffset, safeArea.Top + searchView.Padding.Top);
-
-        if (!reachedThreshold && e.VerticalOffset > 30)
+#if IOS
+        searchView.TranslationY = -Math.Min(e.VerticalOffset, _safeArea.Top + searchView.Padding.Top);
+#elif ANDROID
+        searchView.TranslationY = -Math.Min(e.VerticalOffset, _safeArea.Top + searchView.Height);
+#endif
+        
+        if (!_reachedThreshold && e.VerticalOffset > 30)
         {
             System.Diagnostics.Debug.WriteLine("Fading to 1.0");
             scrollButton.FadeTo(1.0);
-            reachedThreshold = true;
+            _reachedThreshold = true;
         }
-        else if (reachedThreshold && e.VerticalOffset < 30)
+        else if (_reachedThreshold && e.VerticalOffset < 30)
         {
             System.Diagnostics.Debug.WriteLine("Fading to 0.0");
             scrollButton.FadeTo(0.0);
-            reachedThreshold = false;
+            _reachedThreshold = false;
         }
     }
 
@@ -57,9 +62,9 @@ public partial class HomePage : BaseContentPage<HomePageModel>
         contentSpacer.HeightRequest = searchView.Y + searchView.Height;
 
         // Yikes...
-        var mi = typeof(VisualElement).GetMethod("InvalidateMeasure", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+        var methodInfo = typeof(VisualElement).GetMethod("InvalidateMeasure", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
-        mi.Invoke(headerLayout, null);
+        methodInfo?.Invoke(headerLayout, null);
 #endif
     }
 }

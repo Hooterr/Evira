@@ -4,6 +4,7 @@ using Evira.App.PageModels.Abstract;
 using Evira.App.Pages.Home;
 using Evira.App.Pages.Login;
 using Evira.App.Pages.Products;
+using Evira.App.Services;
 using System.Collections.ObjectModel;
 
 namespace Evira.App.PageModels.Home;
@@ -12,15 +13,7 @@ public partial class HomePageModel : BasePageModel
 {
     #region Private Members
 
-    private readonly Random _random = new();
-    private readonly string[] _names =
-    {
-         "Snake Leather Bag",
-         "Suga Leather Shoes",
-         "Leather Casual Suit",
-          "Black Leather Bag",
-          "Airtight Microphone",
-    };
+    private readonly IProductService _productService;
 
     #endregion
 
@@ -37,34 +30,14 @@ public partial class HomePageModel : BasePageModel
     #endregion
 
     #region Constructor
-    private HomeProductModel GenerateProduct()
-    {
-        return new()
-        {
-            Name = _names[_random.Next(0, _names.Length)],
-            Rating = _random.NextDouble() * 5.0,
-            SoldCount = _random.Next(0, 10_000_000),
-            Price = _random.Next(0, 10000),
-            ImageSource = "banner" + _random.Next(1, 5).ToString()
-        };
-    }
-
-    private List<HomeProductModel> GenerateProducts(int count)
-    {
-        var list = new List<HomeProductModel>(count);
-        for (int i = 0; i < count; i++)
-        {
-            list.Add(GenerateProduct());
-        }
-        return list;
-    }
 
     /// <summary>
     /// Default constructor for HomePageModel
     /// </summary>
-    public HomePageModel()
+    public HomePageModel(IProductService productService)
     {
-        Products = new ObservableCollection<HomeProductModel>(GenerateProducts(20));
+        _productService = productService;
+        Products = new ObservableCollection<HomeProductModel>(_productService.GenerateProducts(20));
 
         Categories = new List<HomeCategoryModel>
         {
@@ -110,6 +83,7 @@ public partial class HomePageModel : BasePageModel
             }
 
         };
+
         CategoryFilters = new List<CategoryFilterItemModel>
         {
             new()
@@ -232,7 +206,7 @@ public partial class HomePageModel : BasePageModel
         item.IsSelected = true;
         Products.Clear();
         await Task.Delay(2222);
-        foreach (var product in GenerateProducts(20))
+        foreach (var product in _productService.GenerateProducts(20))
         {
             Products.Add(product);
         }
@@ -260,7 +234,7 @@ public partial class HomePageModel : BasePageModel
     private async Task InfiniteScrollReachedAsync()
     {
         await Task.Delay(2222);
-        foreach (var item in GenerateProducts(20))
+        foreach (var item in _productService.GenerateProducts(20))
         {
             Products.Add(item);
         }

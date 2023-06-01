@@ -25,6 +25,8 @@ using Evira.App.Pages.Wallet;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using Evira.App.Platforms;
+using Evira.App.Services;
+
 namespace Evira.App;
 
 public static class MauiProgram
@@ -135,6 +137,8 @@ public static class MauiProgram
         builder.Services.AddTransient<WalletPage>();
         
         builder.Services.AddTransient<ProfilePage>();
+
+        builder.Services.AddSingleton<IProductService, RandomProductService>();
 
 #if __IOS__
 		builder.Services.AddSingleton<ISafeAreaService, Evira.App.SafeAreaService>();

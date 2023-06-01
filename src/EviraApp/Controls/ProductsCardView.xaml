@@ -7,7 +7,6 @@
     x:Name="control">
 
     <Grid
-        Padding="16,0"
         ColumnDefinitions="162"
         RowDefinitions="162,24,24,24"
         RowSpacing="12">

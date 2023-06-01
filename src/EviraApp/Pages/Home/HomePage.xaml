@@ -251,6 +251,7 @@
                 <DataTemplate
                     x:DataType="models:HomeProductModel">
                     <controls:ProductsCardView
+                        Padding="16,0"
                         Name="{Binding Name}"
                         Command="{Binding Source={Reference page},
                                           Path=BindingContext.SelectProductCommand}"

@@ -9,8 +9,8 @@
     xmlns:models="clr-namespace:Evira.App.Models"
     xmlns:products="clr-namespace:Evira.App.PageModels.Products"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:DataType="products:SearchPageModel"
     x:Name="page"
+    x:DataType="products:SearchPageModel"
     x:TypeArguments="products:SearchPageModel"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
@@ -32,43 +32,61 @@
 
         <Label
             Grid.Row="2"
+            IsVisible="{Binding ShowSearchResults,
+                                Converter={StaticResource InvertedBoolConverter}}"
             Style="{StaticResource H5Bold}"
             Text="Recent"
             VerticalTextAlignment="Center" />
 
         <Label
             Grid.Row="2"
+            IsVisible="{Binding ShowSearchResults}"
+            Style="{StaticResource H5Bold}"
+            Text="{Binding SearchTerm,
+                           StringFormat='Results for &quot;{0}&quot;'}"
+            VerticalTextAlignment="Center" />
+
+        <Label
+            Grid.Row="2"
             HorizontalOptions="End"
+            IsVisible="{Binding ShowSearchResults,
+                                Converter={StaticResource InvertedBoolConverter}}"
             Style="{StaticResource BodyLargeBold}"
             Text="Clear all"
-            VerticalOptions="Center" />
+            VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding ClearAllSearchesCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Label
+            Grid.Row="2"
+            HorizontalOptions="End"
+            IsVisible="{Binding ShowSearchResults}"
+            Style="{StaticResource H5Bold}"
+            Text="{Binding ProductsCount,
+                           StringFormat='{0:N0} found'}"
+            VerticalTextAlignment="Center" />
 
         <BoxView
             Grid.Row="3"
-            BackgroundColor="{StaticResource Greyscale200}" />
-
+            BackgroundColor="{StaticResource Greyscale200}"
+            IsVisible="{Binding ShowSearchResults,
+                                Converter={StaticResource InvertedBoolConverter}}" />
 
         <CollectionView
             Grid.Row="4"
+            IsVisible="{Binding ShowSearchResults,
+                                Converter={StaticResource InvertedBoolConverter}}"
             ItemsSource="{Binding RecentSearches}">
 
             <CollectionView.EmptyView>
-                <VerticalStackLayout
-                    Padding="0,50,0,0"
-                    Spacing="8">
-
-                    <Image HeightRequest="244" Source="https://picsum.photos/244"/>
-
-                    <Label Text="Not Found"
-                           Padding="0,24,0,0"
-                           HorizontalTextAlignment="Center"
-                           Style="{StaticResource H4Bold}"/>
-                    <Label Text="Sorry, the keyword you entered cannot be found, please check again or search with another keyword."
-                           HorizontalTextAlignment="Center"
-                           Style="{StaticResource BodyXLargeRegular}"/>
-                </VerticalStackLayout>
+                <Label
+                    Padding="0,16,0,0"
+                    Text="No recent searches" />
             </CollectionView.EmptyView>
-            
+
             <CollectionView.ItemTemplate>
                 <DataTemplate
                     x:DataType="models:RecentSearchItemModel">
@@ -78,10 +96,17 @@
                         HeightRequest="48"
                         VerticalOptions="Start">
 
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding BindingContext.RecentSearchSelectedCommand,
+                                                  Source={Reference page}}"
+                                CommandParameter="{Binding}" />
+                        </Grid.GestureRecognizers>
+
                         <Label
-                            MaxLines="1"
-                            LineBreakMode="TailTruncation"
                             Grid.Column="0"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="1"
                             Style="{StaticResource BodyXLargeMedium}"
                             Text="{Binding Text}"
                             TextColor="{AppThemeBinding Light={StaticResource Greyscale600}}"
@@ -93,7 +118,8 @@
                             Source="close_square_iconly_light_outline">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding Source={Reference page}, Path=BindingContext.RemoveRecentSearchCommand}"
+                                    Command="{Binding Source={Reference page},
+                                                      Path=BindingContext.RemoveRecentSearchCommand}"
                                     CommandParameter="{Binding}" />
                             </Image.GestureRecognizers>
                         </Image>
@@ -103,6 +129,72 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <CollectionView
+            Grid.Row="4"
+            IsVisible="{Binding ShowSearchResults}"
+            ItemsSource="{Binding ProductResults}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="16"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="16" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:HomeProductModel">
+                    <controls:ProductsCardView
+                        Name="{Binding Name}"
+                        Command="{Binding Source={Reference page},
+                                          Path=BindingContext.SelectProductCommand}"
+                        CommandParameter="{Binding}"
+                        FavouriteCommand="{Binding Source={Reference page},
+                                                   Path=BindingContext.SelectFavoriteProductCommand}"
+                        ImageSource="{Binding ImageSource}"
+                        Price="{Binding Price}"
+                        Rating="{Binding Rating}"
+                        SoldCount="{Binding SoldCount}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+
+                <VerticalStackLayout
+                    Padding="0,50,0,0"
+                    Spacing="8">
+
+                    <Image
+                        HeightRequest="244"
+                        Source="https://picsum.photos/244" />
+
+                    <Label
+                        Padding="0,24,0,0"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource H4Bold}"
+                        Text="Not Found" />
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BodyXLargeRegular}"
+                        Text="Sorry, the keyword you entered cannot be found, please check again or search with another keyword." />
+                </VerticalStackLayout>
+
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+
+        <ContentView
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            BackgroundColor="{Binding BackgroundColor,
+                                      Source={Reference page}}"
+            IsVisible="{Binding IsBusy}">
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="True"
+                VerticalOptions="Center" />
+        </ContentView>
     </Grid>
 
 </abstract:BaseContentPage>
